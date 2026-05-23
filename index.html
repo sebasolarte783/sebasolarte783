@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="NetVision Pro - Aprende redes, protocolos, ciberseguridad y telecomunicaciones de forma interactiva.">
+<title>NetVision Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+  --primary:#38bdf8; --primary-dark:#0ea5e9;
+  --secondary:#7c3aed; --accent:#818cf8;
+  --dark:#07111f; --dark-2:#020617; --dark-3:#0f1f35;
+  --glass:rgba(255,255,255,0.05); --glass-border:rgba(255,255,255,0.08);
+  --text:#ffffff; --text-muted:#cbd5e1; --shadow:rgba(0,0,0,0.4);
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+html{scroll-behavior:smooth;scroll-padding-top:80px;}
+body{background:var(--dark);color:var(--text);overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;
+  background-image:
+    radial-gradient(circle at 20% 80%,rgba(56,189,248,.10) 0%,transparent 50%),
+    radial-gradient(circle at 80% 20%,rgba(124,58,237,.10) 0%,transparent 50%),
+    radial-gradient(circle at 40% 40%,rgba(129,140,248,.08) 0%,transparent 50%);
+  pointer-events:none;z-index:-1;}
+
+.progress-bar{position:fixed;top:0;left:0;width:0;height:3px;
+  background:linear-gradient(90deg,var(--primary),var(--accent));z-index:1001;transition:width .2s;}
+
+nav{position:fixed;top:0;left:0;width:100%;padding:18px 6%;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(7,17,31,.95);backdrop-filter:blur(20px);
+  z-index:1000;border-bottom:1px solid var(--glass-border);transition:all .3s;}
+nav.scrolled{padding:12px 6%;background:rgba(7,17,31,.99);box-shadow:0 8px 32px var(--shadow);}
+.logo{font-size:26px;font-weight:800;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  display:flex;align-items:center;gap:10px;text-decoration:none;
+  animation:glow 2.5s ease-in-out infinite alternate;}
+@keyframes glow{from{filter:drop-shadow(0 0 4px var(--primary));}to{filter:drop-shadow(0 0 18px var(--primary));}}
+nav ul{display:flex;list-style:none;gap:26px;align-items:center;}
+nav ul li a{text-decoration:none;color:var(--text);font-weight:500;
+  position:relative;transition:all .3s;padding:6px 0;}
+nav ul li a::after{content:'';position:absolute;bottom:0;left:0;
+  width:0;height:2px;background:linear-gradient(90deg,var(--primary),var(--accent));transition:width .3s;}
+nav ul li a:hover::after,nav ul li a.active::after{width:100%;}
+nav ul li a:hover{color:var(--primary);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px;z-index:1100;}
+.hamburger span{display:block;width:26px;height:2.5px;background:var(--text);border-radius:2px;transition:all .35s;}
+.hamburger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.hamburger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg);}
+@media(max-width:768px){
+  .hamburger{display:flex;}
+  nav ul{position:fixed;top:0;right:-100%;width:75%;max-width:300px;height:100vh;
+    background:rgba(7,17,31,.98);backdrop-filter:blur(30px);
+    flex-direction:column;justify-content:center;align-items:center;
+    gap:30px;border-left:1px solid var(--glass-border);
+    transition:right .4s cubic-bezier(.23,1,.32,1);z-index:1050;}
+  nav ul.open{right:0;}
+  nav ul li a{font-size:20px;}
+  .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1040;}
+  .nav-overlay.open{display:block;}
+}
+
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:140px 6% 100px;
+  background:linear-gradient(135deg,rgba(7,17,31,.95) 0%,rgba(2,6,23,.98) 100%),
+    url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1600&auto=format&fit=crop');
+  background-size:cover;background-position:center;background-attachment:fixed;
+  position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(56,189,248,.06),transparent);
+  animation:shimmer 4s ease-in-out infinite;}
+@keyframes shimmer{0%{left:-100%;}100%{left:200%;}}
+.hero-content{max-width:900px;position:relative;z-index:2;}
+.hero h1{font-size:clamp(40px,7vw,78px);margin-bottom:26px;line-height:1.1;
+  background:linear-gradient(135deg,var(--primary),var(--accent),#fbbf24);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:titleFloat 6s ease-in-out infinite;}
+@keyframes titleFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.hero p{font-size:clamp(16px,2.5vw,21px);color:var(--text-muted);
+  line-height:1.8;margin-bottom:40px;max-width:650px;margin-left:auto;margin-right:auto;}
+.hero-buttons{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;}
+.btn{padding:15px 36px;border:none;border-radius:50px;font-size:16px;cursor:pointer;
+  transition:all .4s cubic-bezier(.175,.885,.32,1.275);font-weight:600;
+  position:relative;overflow:hidden;letter-spacing:.3px;}
+.btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);transition:left .5s;}
+.btn:hover::before{left:100%;}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:#fff;box-shadow:0 12px 30px rgba(56,189,248,.35);}
+.btn-primary:hover{transform:translateY(-7px) scale(1.05);box-shadow:0 22px 45px rgba(56,189,248,.55);}
+.btn-secondary{background:transparent;border:2px solid var(--primary);color:var(--primary);}
+.btn-secondary:hover{background:var(--primary);color:var(--dark);transform:translateY(-7px) scale(1.05);}
+
+.container{width:90%;max-width:1400px;margin:auto;}
+.section{padding:120px 0;}
+.section-title{text-align:center;margin-bottom:70px;}
+.section-title h2{font-size:clamp(34px,5vw,54px);margin-bottom:16px;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  display:inline-block;position:relative;}
+.section-title h2::after{content:'';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);
+  width:70px;height:4px;background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:2px;}
+.section-title p{color:var(--text-muted);font-size:17px;margin-top:20px;}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:30px;}
+.card{background:var(--glass);border:1px solid var(--glass-border);border-radius:26px;
+  padding:36px 28px;transition:transform .4s ease,box-shadow .4s ease,border-color .4s ease;
+  position:relative;overflow:hidden;backdrop-filter:blur(20px);}
+.card::before{content:'';position:absolute;width:230px;height:230px;
+  background:linear-gradient(135deg,rgba(56,189,248,.12),rgba(124,58,237,.08));
+  border-radius:50%;top:-115px;right:-115px;transition:transform .5s;}
+.card:hover{transform:translateY(-14px);box-shadow:0 28px 56px var(--shadow);border-color:var(--primary);}
+.card:hover::before{transform:scale(1.3) rotate(180deg);}
+.icon{font-size:50px;margin-bottom:18px;display:block;transition:transform .3s;}
+.card:hover .icon{transform:scale(1.15) rotate(8deg);}
+.card h3{font-size:21px;margin-bottom:11px;font-weight:700;}
+.card p{color:var(--text-muted);line-height:1.8;margin-bottom:22px;font-size:14px;}
+.card-btn{padding:11px 24px;border:none;border-radius:20px;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:#fff;cursor:pointer;transition:all .3s;font-weight:600;font-size:14px;
+  display:inline-flex;align-items:center;gap:8px;font-family:'Poppins',sans-serif;}
+.card-btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(56,189,248,.4);}
+
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.info-img{position:relative;border-radius:28px;overflow:hidden;}
+.info-img img{width:100%;border-radius:28px;box-shadow:0 20px 60px var(--shadow);transition:transform .5s;display:block;}
+.info-img:hover img{transform:scale(1.04);}
+.info-img::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(56,189,248,.15),transparent);
+  border-radius:28px;opacity:0;transition:opacity .3s;}
+.info-img:hover::after{opacity:1;}
+.info-text h2{font-size:clamp(30px,4vw,46px);margin-bottom:20px;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.info-text p{color:var(--text-muted);line-height:1.9;font-size:16px;margin-bottom:20px;}
+.benefit-list{list-style:none;margin-bottom:28px;}
+.benefit-list li{display:flex;align-items:flex-start;gap:12px;
+  padding:9px 0;border-bottom:1px solid var(--glass-border);color:var(--text-muted);font-size:15px;}
+.benefit-list li:last-child{border-bottom:none;}
+.benefit-list li i{color:var(--primary);margin-top:3px;flex-shrink:0;}
+@media(max-width:1024px){
+  .info-grid{grid-template-columns:1fr;gap:50px;text-align:center;}
+  .benefit-list li{justify-content:center;}
+}
+
+.glossary-search-wrap{max-width:580px;margin:0 auto 46px;position:relative;}
+.glossary-search{width:100%;padding:15px 22px 15px 50px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(56,189,248,.22);
+  border-radius:50px;color:var(--text);font-size:16px;font-family:'Poppins',sans-serif;
+  outline:none;transition:all .3s;}
+.glossary-search::placeholder{color:var(--text-muted);}
+.glossary-search:focus{border-color:var(--primary);background:rgba(56,189,248,.07);box-shadow:0 0 0 4px rgba(56,189,248,.12);}
+.search-icon{position:absolute;left:19px;top:50%;transform:translateY(-50%);color:var(--primary);font-size:15px;pointer-events:none;}
+.glossary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+.gloss-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;
+  padding:18px 20px;transition:all .3s;}
+.gloss-card:hover{border-color:rgba(56,189,248,.35);background:rgba(56,189,248,.06);transform:translateY(-4px);}
+.gloss-term{font-size:14px;font-weight:700;color:var(--primary);margin-bottom:6px;display:flex;align-items:center;gap:7px;}
+.gloss-term i{font-size:11px;opacity:.7;}
+.gloss-def{font-size:13px;color:var(--text-muted);line-height:1.65;}
+.gloss-empty{text-align:center;padding:50px;color:var(--text-muted);font-size:16px;grid-column:1/-1;}
+
+footer{margin-top:80px;background:var(--dark-2);padding:50px 0 28px;
+  text-align:center;border-top:1px solid var(--glass-border);position:relative;}
+footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--primary),var(--accent),transparent);}
+footer p{color:var(--text-muted);font-size:15px;}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(2,6,23,.88);backdrop-filter:blur(14px);
+  z-index:2000;display:flex;align-items:center;justify-content:center;padding:16px;
+  opacity:0;pointer-events:none;transition:opacity .35s;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{background:linear-gradient(145deg,#0d1f38,#0a1528);
+  border:1px solid rgba(56,189,248,.22);border-radius:26px;
+  width:100%;max-width:900px;max-height:92vh;
+  overflow:hidden;display:flex;flex-direction:column;
+  box-shadow:0 40px 80px rgba(0,0,0,.7),0 0 0 1px rgba(56,189,248,.08);
+  transform:translateY(40px) scale(.96);
+  transition:transform .4s cubic-bezier(.23,1,.32,1);}
+.modal-overlay.open .modal{transform:translateY(0) scale(1);}
+.modal-header{padding:24px 28px 20px;border-bottom:1px solid rgba(255,255,255,.07);
+  display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(135deg,rgba(56,189,248,.08),rgba(124,58,237,.06));flex-shrink:0;}
+.modal-header-left{display:flex;align-items:center;gap:14px;}
+.modal-icon-big{font-size:42px;line-height:1;}
+.modal-header h3{font-size:22px;font-weight:700;margin-bottom:3px;}
+.modal-header .modal-subtitle{color:var(--text-muted);font-size:13px;}
+.modal-close{width:36px;height:36px;border-radius:50%;border:1px solid var(--glass-border);
+  background:var(--glass);color:var(--text-muted);cursor:pointer;font-size:15px;
+  display:flex;align-items:center;justify-content:center;transition:all .3s;flex-shrink:0;}
+.modal-close:hover{background:rgba(239,68,68,.2);border-color:rgba(239,68,68,.4);color:#ef4444;transform:rotate(90deg);}
+.modal-tabs{display:flex;gap:3px;padding:13px 28px 0;
+  border-bottom:1px solid rgba(255,255,255,.07);flex-shrink:0;overflow-x:auto;}
+.modal-tabs::-webkit-scrollbar{height:0;}
+.modal-tab{padding:9px 18px;border-radius:10px 10px 0 0;border:none;
+  background:transparent;color:var(--text-muted);cursor:pointer;
+  font-weight:600;font-size:13px;font-family:'Poppins',sans-serif;
+  transition:all .3s;position:relative;display:flex;align-items:center;gap:7px;white-space:nowrap;}
+.modal-tab::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--primary),var(--accent));transform:scaleX(0);transition:transform .3s;}
+.modal-tab.active{color:var(--primary);background:rgba(56,189,248,.07);}
+.modal-tab.active::after{transform:scaleX(1);}
+.modal-tab:hover{color:var(--text);background:rgba(255,255,255,.04);}
+.modal-tab.hidden{display:none;}
+.modal-body{overflow-y:auto;flex:1;}
+.modal-body::-webkit-scrollbar{width:5px;}
+.modal-body::-webkit-scrollbar-thumb{background:rgba(56,189,248,.3);border-radius:3px;}
+.tab-panel{padding:24px 28px 28px;display:none;}
+.tab-panel.active{display:block;}
+
+.topic-intro{font-size:15px;color:var(--text-muted);line-height:1.85;margin-bottom:24px;}
+.concepts-title{font-size:16px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:9px;}
+.concepts-title i{color:var(--primary);}
+.concepts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;}
+.concept-item{background:rgba(56,189,248,.05);border:1px solid rgba(56,189,248,.12);
+  border-radius:13px;padding:14px 16px;display:flex;align-items:flex-start;gap:10px;transition:all .3s;}
+.concept-item:hover{background:rgba(56,189,248,.1);border-color:rgba(56,189,248,.3);transform:translateX(4px);}
+.concept-dot{width:7px;height:7px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--accent));flex-shrink:0;margin-top:6px;}
+.concept-item strong{font-size:13px;font-weight:600;display:block;margin-bottom:3px;}
+.concept-item span{font-size:12px;color:var(--text-muted);line-height:1.5;}
+.resources-section{margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.07);}
+.resources-title{font-size:14px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.resources-title i{color:var(--accent);}
+.resource-chips{display:flex;flex-wrap:wrap;gap:8px;}
+.chip{padding:6px 14px;border-radius:18px;font-size:12px;font-weight:500;
+  border:1px solid var(--glass-border);color:var(--text-muted);background:var(--glass);
+  display:flex;align-items:center;gap:5px;transition:all .3s;}
+.chip:hover{border-color:var(--primary);color:var(--primary);background:rgba(56,189,248,.07);}
+
+.video-container{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;
+  border-radius:13px;background:#000;margin-bottom:16px;}
+.video-container iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:13px;}
+.video-note{background:rgba(56,189,248,.06);border:1px solid rgba(56,189,248,.15);
+  border-radius:11px;padding:12px 16px;font-size:13px;color:var(--text-muted);line-height:1.6;
+  display:flex;gap:9px;}
+.video-note i{color:var(--primary);flex-shrink:0;margin-top:2px;}
+
+.osi-hint{text-align:center;color:var(--text-muted);font-size:13px;margin-bottom:14px;
+  display:flex;align-items:center;justify-content:center;gap:7px;}
+.osi-hint i{color:var(--primary);}
+.osi-diagram{display:flex;flex-direction:column;gap:7px;}
+.osi-layer{border-radius:12px;border:1px solid transparent;cursor:pointer;transition:all .3s;overflow:hidden;}
+.osi-layer-header{display:flex;align-items:center;gap:13px;padding:13px 16px;transition:all .3s;user-select:none;}
+.osi-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:13px;flex-shrink:0;color:#fff;}
+.osi-name{font-weight:700;font-size:14px;flex:1;}
+.osi-proto{font-size:11px;color:var(--text-muted);}
+.osi-arrow{font-size:11px;color:var(--text-muted);transition:transform .3s;flex-shrink:0;}
+.osi-layer.open .osi-arrow{transform:rotate(180deg);}
+.osi-detail{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.23,1,.32,1);padding:0 16px;}
+.osi-layer.open .osi-detail{max-height:280px;}
+.osi-detail-inner{padding-bottom:14px;border-top:1px solid rgba(255,255,255,.08);margin-top:2px;padding-top:12px;}
+.osi-detail p{font-size:13px;color:var(--text-muted);line-height:1.7;margin-bottom:9px;}
+.osi-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.osi-tag{padding:3px 11px;border-radius:11px;font-size:11px;font-weight:600;color:#fff;}
+
+.l7{background:rgba(249,115,22,.08);border-color:rgba(249,115,22,.2);}
+.l7 .osi-num{background:linear-gradient(135deg,#f97316,#ea580c);}
+.l7 .osi-tag{background:rgba(249,115,22,.25);color:#fb923c;}
+.l7.open,.l7:hover{background:rgba(249,115,22,.13);border-color:rgba(249,115,22,.4);}
+.l6{background:rgba(234,179,8,.07);border-color:rgba(234,179,8,.2);}
+.l6 .osi-num{background:linear-gradient(135deg,#eab308,#ca8a04);}
+.l6 .osi-tag{background:rgba(234,179,8,.25);color:#facc15;}
+.l6.open,.l6:hover{background:rgba(234,179,8,.12);border-color:rgba(234,179,8,.4);}
+.l5{background:rgba(34,197,94,.07);border-color:rgba(34,197,94,.2);}
+.l5 .osi-num{background:linear-gradient(135deg,#22c55e,#16a34a);}
+.l5 .osi-tag{background:rgba(34,197,94,.25);color:#4ade80;}
+.l5.open,.l5:hover{background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.4);}
+.l4{background:rgba(6,182,212,.07);border-color:rgba(6,182,212,.2);}
+.l4 .osi-num{background:linear-gradient(135deg,#06b6d4,#0891b2);}
+.l4 .osi-tag{background:rgba(6,182,212,.25);color:#22d3ee;}
+.l4.open,.l4:hover{background:rgba(6,182,212,.12);border-color:rgba(6,182,212,.4);}
+.l3{background:rgba(59,130,246,.07);border-color:rgba(59,130,246,.2);}
+.l3 .osi-num{background:linear-gradient(135deg,#3b82f6,#2563eb);}
+.l3 .osi-tag{background:rgba(59,130,246,.25);color:#60a5fa;}
+.l3.open,.l3:hover{background:rgba(59,130,246,.12);border-color:rgba(59,130,246,.4);}
+.l2{background:rgba(139,92,246,.07);border-color:rgba(139,92,246,.2);}
+.l2 .osi-num{background:linear-gradient(135deg,#8b5cf6,#7c3aed);}
+.l2 .osi-tag{background:rgba(139,92,246,.25);color:#a78bfa;}
+.l2.open,.l2:hover{background:rgba(139,92,246,.12);border-color:rgba(139,92,246,.4);}
+.l1{background:rgba(236,72,153,.07);border-color:rgba(236,72,153,.2);}
+.l1 .osi-num{background:linear-gradient(135deg,#ec4899,#db2777);}
+.l1 .osi-tag{background:rgba(236,72,153,.25);color:#f472b6;}
+.l1.open,.l1:hover{background:rgba(236,72,153,.12);border-color:rgba(236,72,153,.4);}
+
+.calc-wrap{max-width:520px;margin:0 auto;}
+.calc-title{font-size:16px;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:9px;}
+.calc-title i{color:var(--primary);}
+.calc-row{display:grid;grid-template-columns:1fr auto auto;gap:12px;margin-bottom:16px;align-items:end;}
+.calc-field{display:flex;flex-direction:column;gap:6px;}
+.calc-field label{font-size:12px;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
+.calc-field input,.calc-field select{
+  padding:11px 15px;background:rgba(255,255,255,.06);
+  border:1px solid rgba(56,189,248,.2);border-radius:11px;
+  color:var(--text);font-size:15px;font-family:'Poppins',sans-serif;outline:none;transition:all .3s;}
+.calc-field input:focus,.calc-field select:focus{
+  border-color:var(--primary);background:rgba(56,189,248,.08);box-shadow:0 0 0 3px rgba(56,189,248,.12);}
+.calc-field select option{background:#0d1f38;}
+.calc-btn{padding:11px 22px;border:none;border-radius:11px;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:#fff;cursor:pointer;font-weight:700;font-size:14px;font-family:'Poppins',sans-serif;
+  transition:all .3s;white-space:nowrap;align-self:end;}
+.calc-btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(56,189,248,.4);}
+.calc-error{color:#f87171;font-size:13px;margin-bottom:12px;padding:10px 14px;
+  background:rgba(239,68,68,.08);border-radius:10px;border:1px solid rgba(239,68,68,.2);display:none;}
+.calc-results{background:rgba(56,189,248,.05);border:1px solid rgba(56,189,248,.18);
+  border-radius:14px;padding:18px;display:none;}
+.calc-results.visible{display:block;animation:fadeIn .3s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.calc-result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.calc-result-item{background:rgba(0,0,0,.2);border-radius:11px;padding:12px 14px;}
+.calc-result-item label{font-size:10px;color:var(--text-muted);font-weight:700;
+  text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;}
+.calc-result-item span{font-size:14px;font-weight:700;color:var(--primary);font-family:monospace;}
+
+/* ═══════════════════════════════════════
+   CHATBOT IA
+═══════════════════════════════════════ */
+#chatBtn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(56,189,248,.45), 0 0 0 0 rgba(56,189,248,.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  z-index: 3000;
+  transition: transform .3s, box-shadow .3s;
+  animation: pulse-ring 2.5s ease-in-out infinite;
+}
+@keyframes pulse-ring {
+  0%,100% { box-shadow: 0 8px 32px rgba(56,189,248,.45), 0 0 0 0 rgba(56,189,248,.35); }
+  50%      { box-shadow: 0 8px 32px rgba(56,189,248,.45), 0 0 0 14px rgba(56,189,248,0); }
+}
+#chatBtn:hover { transform: scale(1.1); }
+#chatBtn.open  { animation: none; transform: scale(1.05); box-shadow: 0 12px 40px rgba(56,189,248,.6); }
+
+#chatWindow {
+  position: fixed;
+  bottom: 110px;
+  right: 30px;
+  width: 380px;
+  max-height: 560px;
+  background: linear-gradient(145deg, #0d1f38, #0a1528);
+  border: 1px solid rgba(56,189,248,.25);
+  border-radius: 24px;
+  box-shadow: 0 30px 80px rgba(0,0,0,.7), 0 0 0 1px rgba(56,189,248,.08);
+  display: flex;
+  flex-direction: column;
+  z-index: 3000;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px) scale(.96);
+  transition: opacity .35s, transform .35s cubic-bezier(.23,1,.32,1);
+}
+#chatWindow.open {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0) scale(1);
+}
+.chat-head {
+  padding: 16px 18px;
+  background: linear-gradient(135deg, rgba(56,189,248,.12), rgba(124,58,237,.1));
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.chat-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.chat-head-info strong { font-size: 15px; display: block; }
+.chat-head-info span {
+  font-size: 11px;
+  color: #4ade80;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.chat-head-info span::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4ade80;
+  display: inline-block;
+  animation: blink 1.5s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+.chat-close-btn {
+  margin-left: auto;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  background: var(--glass);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .3s;
+  flex-shrink: 0;
+}
+.chat-close-btn:hover { background: rgba(239,68,68,.2); color: #ef4444; transform: rotate(90deg); }
+
+.chat-status-bar {
+  padding: 7px 16px;
+  background: rgba(34,197,94,.08);
+  border-bottom: 1px solid rgba(34,197,94,.15);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+  font-size: 11px;
+  color: #4ade80;
+}
+.chat-status-bar i { font-size: 10px; }
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scroll-behavior: smooth;
+}
+.chat-messages::-webkit-scrollbar { width: 4px; }
+.chat-messages::-webkit-scrollbar-thumb { background: rgba(56,189,248,.25); border-radius: 2px; }
+
+.msg {
+  max-width: 86%;
+  padding: 10px 14px;
+  border-radius: 18px;
+  font-size: 13px;
+  line-height: 1.65;
+  animation: msgIn .25s ease;
+  word-break: break-word;
+}
+@keyframes msgIn { from{opacity:0;transform:translateY(8px);} to{opacity:1;transform:translateY(0);} }
+.msg.bot {
+  background: rgba(56,189,248,.1);
+  border: 1px solid rgba(56,189,248,.18);
+  border-bottom-left-radius: 5px;
+  align-self: flex-start;
+  color: var(--text);
+}
+.msg.user {
+  background: linear-gradient(135deg, rgba(56,189,248,.22), rgba(124,58,237,.18));
+  border: 1px solid rgba(56,189,248,.25);
+  border-bottom-right-radius: 5px;
+  align-self: flex-end;
+  color: var(--text);
+}
+.msg.typing {
+  background: rgba(56,189,248,.08);
+  border: 1px solid rgba(56,189,248,.14);
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 12px 16px;
+}
+.typing-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--primary);
+  animation: typingBounce .8s ease-in-out infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: .15s; }
+.typing-dot:nth-child(3) { animation-delay: .3s; }
+@keyframes typingBounce { 0%,60%,100%{transform:translateY(0);opacity:.4;} 30%{transform:translateY(-6px);opacity:1;} }
+
+.chat-suggestions {
+  padding: 0 14px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.suggestion-chip {
+  padding: 5px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(56,189,248,.22);
+  background: rgba(56,189,248,.06);
+  color: var(--primary);
+  font-size: 11px;
+  cursor: pointer;
+  transition: all .25s;
+  font-family: 'Poppins', sans-serif;
+  white-space: nowrap;
+}
+.suggestion-chip:hover { background: rgba(56,189,248,.18); border-color: var(--primary); transform: translateY(-1px); }
+
+.chat-input-row {
+  padding: 12px 14px;
+  border-top: 1px solid rgba(255,255,255,.07);
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+#chatInput {
+  flex: 1;
+  padding: 10px 14px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(56,189,248,.2);
+  border-radius: 14px;
+  color: var(--text);
+  font-size: 13px;
+  font-family: 'Poppins', sans-serif;
+  outline: none;
+  resize: none;
+  min-height: 40px;
+  max-height: 100px;
+  transition: border-color .3s;
+  line-height: 1.5;
+}
+#chatInput:focus { border-color: var(--primary); background: rgba(56,189,248,.07); }
+#chatInput::placeholder { color: rgba(203,213,225,.4); }
+#sendBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all .3s;
+}
+#sendBtn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(56,189,248,.4); }
+#sendBtn:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; }
+
+.chat-no-key {
+  padding: 16px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.chat-no-key i { font-size: 28px; color: var(--primary); display: block; margin-bottom: 8px; }
+
+@media(max-width:500px){
+  #chatWindow { width: calc(100vw - 28px); right: 14px; bottom: 100px; }
+  #chatBtn { bottom: 20px; right: 20px; }
+}
+
+@media(max-width:600px){
+  .modal{border-radius:20px;}
+  .modal-header{padding:18px 18px 14px;}
+  .tab-panel{padding:18px;}
+  .modal-header h3{font-size:19px;}
+  .modal-tabs{padding:11px 18px 0;}
+  .modal-tab{padding:7px 12px;font-size:12px;}
+  .hero{background-attachment:scroll;}
+  .section{padding:80px 0;}
+  .hero-buttons{flex-direction:column;align-items:center;}
+  .btn{width:100%;max-width:300px;text-align:center;justify-content:center;}
+  .calc-row{grid-template-columns:1fr;gap:10px;}
+  .calc-result-grid{grid-template-columns:1fr;}
+  .osi-proto{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav id="navbar">
+  <a href="#home" class="logo"><i class="fas fa-network-wired"></i> NetVision</a>
+  <ul id="navMenu">
+    <li><a href="#home" class="active">Inicio</a></li>
+    <li><a href="#temas">Temas</a></li>
+    <li><a href="#info">Por qué</a></li>
+    <li><a href="#glosario">Glosario</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" aria-label="Menú" role="button" tabindex="0">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>Aprende Redes Como Un Profesional</h1>
+    <p>Explora networking, protocolos, ciberseguridad, cloud y telecomunicaciones en una plataforma moderna e interactiva.</p>
+    <div class="hero-buttons">
+      <button class="btn btn-primary" onclick="scrollToSection('temas')"><i class="fas fa-play"></i> Comenzar Ahora</button>
+      <button class="btn btn-secondary" onclick="scrollToSection('glosario')"><i class="fas fa-book"></i> Ver Glosario</button>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="temas">
+  <div class="container">
+    <div class="section-title">
+      <h2>🔥 Temas Destacados</h2>
+      <p>Aprende los conceptos más importantes de redes con contenido interactivo y videos</p>
+    </div>
+    <div class="cards">
+      <div class="card"><span class="icon">🖥️</span><h3>Modelo OSI</h3><p>Comprende las 7 capas y cómo viajan los datos dentro de una red moderna.</p><button class="card-btn" onclick="openModal('osi')"><i class="fas fa-arrow-right"></i> Explorar</button></div>
+      <div class="card"><span class="icon">📡</span><h3>Direcciones IP</h3><p>Domina IPv4, IPv6, subnetting y configuración profesional de redes.</p><button class="card-btn" onclick="openModal('ip')"><i class="fas fa-arrow-right"></i> Explorar</button></div>
+      <div class="card"><span class="icon">🔐</span><h3>Ciberseguridad</h3><p>Protege redes contra ataques informáticos con técnicas avanzadas.</p><button class="card-btn" onclick="openModal('security')"><i class="fas fa-arrow-right"></i> Explorar</button></div>
+      <div class="card"><span class="icon">🌍</span><h3>Protocolos TCP/IP</h3><p>Estudia TCP, UDP, HTTP, DNS, DHCP y protocolos esenciales de red.</p><button class="card-btn" onclick="openModal('protocols')"><i class="fas fa-arrow-right"></i> Explorar</button></div>
+      <div class="card"><span class="icon">📶</span><h3>WiFi & Routers</h3><p>Configura redes inalámbricas y optimiza conexiones profesionales.</p><button class="card-btn" onclick="openModal('wifi')"><i class="fas fa-arrow-right"></i> Explorar</button></div>
+      <div class="card"><span class="icon">🔀</span><h3>Switching & VLANs</h3><p>Segmenta redes con switches, VLANs y domina el protocolo Spanning Tree.</p><button class="card-btn" onclick="openModal('switching')"><i class="fas fa-arrow-right"></i> Explorar</button></div>
+      <div class="card"><span class="icon">🗺️</span><h3>Routing Dinámico</h3><p>Aprende OSPF, BGP y los protocolos de enrutamiento que mueven Internet.</p><button class="card-btn" onclick="openModal('routing')"><i class="fas fa-arrow-right"></i> Explorar</button></div>
+      <div class="card"><span class="icon">🔌</span><h3>Cableado Estructurado</h3><p>Normas TIA/EIA, categorías de cables, fibra óptica y topologías físicas.</p><button class="card-btn" onclick="openModal('cabling')"><i class="fas fa-arrow-right"></i> Explorar</button></div>
+      <div class="card"><span class="icon">☁️</span><h3>Cloud Networking</h3><p>Redes en AWS, Azure y GCP: VPC, subnets, balanceadores y CDN.</p><button class="card-btn" onclick="openModal('cloud')"><i class="fas fa-arrow-right"></i> Explorar</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="info">
+  <div class="container">
+    <div class="info-grid">
+      <div class="info-img">
+        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop" alt="Redes profesionales">
+      </div>
+      <div class="info-text">
+        <h2>💡 ¿Por qué aprender redes?</h2>
+        <p>Las redes son el corazón del mundo digital. Empresas y organizaciones necesitan especialistas en conectividad, ciberseguridad y administración.</p>
+        <ul class="benefit-list">
+          <li><i class="fas fa-check-circle"></i> Salarios competitivos en el sector tecnológico</li>
+          <li><i class="fas fa-check-circle"></i> Alta demanda laboral a nivel global</li>
+          <li><i class="fas fa-check-circle"></i> Acceso a certificaciones CCNA, CompTIA y más</li>
+          <li><i class="fas fa-check-circle"></i> Base sólida para cloud computing y DevOps</li>
+          <li><i class="fas fa-check-circle"></i> Trabajo remoto en equipos internacionales</li>
+        </ul>
+        <button class="btn btn-primary" onclick="scrollToSection('temas')"><i class="fas fa-rocket"></i> Comenzar Ahora</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="glosario">
+  <div class="container">
+    <div class="section-title">
+      <h2>📖 Glosario de Redes</h2>
+      <p>Encuentra definiciones rápidas de los términos más usados en networking</p>
+    </div>
+    <div class="glossary-search-wrap">
+      <i class="fas fa-search search-icon"></i>
+      <input class="glossary-search" id="glossSearch" type="text" placeholder="Buscar término… ej: VLAN, OSPF, MTU" oninput="filterGlossary()">
+    </div>
+    <div class="glossary-grid" id="glossaryGrid"></div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 <strong>NetVision Pro</strong> | Plataforma interactiva de redes y ciberseguridad</p>
+  <p style="margin-top:10px;font-size:14px;">Desarrollado con ❤️ para futuros expertos en redes</p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-header-left">
+        <span class="modal-icon-big" id="modalIcon"></span>
+        <div><h3 id="modalTitle"></h3><span class="modal-subtitle" id="modalSubtitle"></span></div>
+      </div>
+      <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-tabs">
+      <button class="modal-tab active" onclick="switchTab('content')" id="tab-content"><i class="fas fa-file-alt"></i> Contenido</button>
+      <button class="modal-tab hidden" onclick="switchTab('diagram')" id="tab-diagram"><i class="fas fa-layer-group"></i> Diagrama</button>
+      <button class="modal-tab hidden" onclick="switchTab('calc')" id="tab-calc"><i class="fas fa-calculator"></i> Calculadora</button>
+      <button class="modal-tab" onclick="switchTab('video')" id="tab-video"><i class="fas fa-play-circle"></i> Video</button>
+    </div>
+    <div class="modal-body">
+      <div class="tab-panel active" id="panel-content">
+        <p class="topic-intro" id="modalIntro"></p>
+        <div class="concepts-title"><i class="fas fa-layer-group"></i> Conceptos Clave</div>
+        <div class="concepts-grid" id="modalConcepts"></div>
+        <div class="resources-section">
+          <div class="resources-title"><i class="fas fa-tag"></i> Temas relacionados</div>
+          <div class="resource-chips" id="modalChips"></div>
+        </div>
+      </div>
+      <div class="tab-panel" id="panel-diagram">
+        <div class="osi-hint"><i class="fas fa-hand-pointer"></i> Haz clic en una capa para ver su detalle</div>
+        <div class="osi-diagram" id="osiDiagram"></div>
+      </div>
+      <div class="tab-panel" id="panel-calc">
+        <div class="calc-wrap">
+          <div class="calc-title"><i class="fas fa-calculator"></i> Calculadora de Subnetting</div>
+          <div class="calc-row">
+            <div class="calc-field">
+              <label>Dirección IP</label>
+              <input type="text" id="calcIP" placeholder="192.168.1.0" maxlength="15">
+            </div>
+            <div class="calc-field">
+              <label>Prefijo CIDR</label>
+              <select id="calcCIDR">
+                <option value="8">/8</option><option value="9">/9</option><option value="10">/10</option>
+                <option value="11">/11</option><option value="12">/12</option><option value="13">/13</option>
+                <option value="14">/14</option><option value="15">/15</option><option value="16">/16</option>
+                <option value="17">/17</option><option value="18">/18</option><option value="19">/19</option>
+                <option value="20">/20</option><option value="21">/21</option><option value="22">/22</option>
+                <option value="23">/23</option><option value="24" selected>/24</option><option value="25">/25</option>
+                <option value="26">/26</option><option value="27">/27</option><option value="28">/28</option>
+                <option value="29">/29</option><option value="30">/30</option><option value="31">/31</option>
+                <option value="32">/32</option>
+              </select>
+            </div>
+            <button class="calc-btn" onclick="calcSubnet()"><i class="fas fa-bolt"></i> Calcular</button>
+          </div>
+          <div id="calcError" class="calc-error"></div>
+          <div class="calc-results" id="calcResults">
+            <div class="calc-result-grid">
+              <div class="calc-result-item"><label>Red (Network)</label><span id="resNetwork"></span></div>
+              <div class="calc-result-item"><label>Broadcast</label><span id="resBroadcast"></span></div>
+              <div class="calc-result-item"><label>Primer Host</label><span id="resFirst"></span></div>
+              <div class="calc-result-item"><label>Último Host</label><span id="resLast"></span></div>
+              <div class="calc-result-item"><label>Máscara</label><span id="resMask"></span></div>
+              <div class="calc-result-item"><label>Wildcard</label><span id="resWild"></span></div>
+              <div class="calc-result-item"><label>Hosts Totales</label><span id="resTotal"></span></div>
+              <div class="calc-result-item"><label>Hosts Útiles</label><span id="resUsable"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" id="panel-video">
+        <div class="video-container">
+          <iframe id="modalVideo" src="" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" loading="lazy"></iframe>
+        </div>
+        <div class="video-note"><i class="fas fa-info-circle"></i><span id="modalVideoNote"></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     CHATBOT IA FLOTANTE
+═══════════════════════════════════ -->
+<button id="chatBtn" onclick="toggleChat()" aria-label="Abrir asistente IA">🤖</button>
+
+<div id="chatWindow" role="dialog" aria-label="Asistente IA de NetVision">
+
+  <!-- HEADER -->
+  <div class="chat-head">
+    <div class="chat-avatar">🧠</div>
+    <div class="chat-head-info">
+      <strong>NetBot IA</strong>
+      <span>En línea · Experto en redes</span>
+    </div>
+    <button class="chat-close-btn" onclick="toggleChat()"><i class="fas fa-times"></i></button>
+  </div>
+
+  <!-- N8N STATUS -->
+  <div class="chat-status-bar">
+    <i class="fas fa-circle"></i> Conectado · Workflow n8n activo
+  </div>
+
+  <!-- MENSAJES -->
+  <div class="chat-messages" id="chatMessages">
+    <div class="msg bot">
+      👋 ¡Hola! Soy <strong>NetBot</strong>, tu asistente especializado en redes.<br><br>
+      Puedo ayudarte con Modelo OSI, subnetting, protocolos, ciberseguridad, routing y mucho más. ¡Escribe tu pregunta!
+    </div>
+  </div>
+
+  <!-- SUGERENCIAS RÁPIDAS -->
+  <div class="chat-suggestions" id="chatSuggestions">
+    <button class="suggestion-chip" onclick="sendSuggestion('¿Qué es el Modelo OSI?')">Modelo OSI</button>
+    <button class="suggestion-chip" onclick="sendSuggestion('Explica subnetting con ejemplo')">Subnetting</button>
+    <button class="suggestion-chip" onclick="sendSuggestion('¿Diferencia entre TCP y UDP?')">TCP vs UDP</button>
+    <button class="suggestion-chip" onclick="sendSuggestion('¿Qué es una VLAN y para qué sirve?')">VLANs</button>
+    <button class="suggestion-chip" onclick="sendSuggestion('¿Cómo funciona OSPF?')">OSPF</button>
+    <button class="suggestion-chip" onclick="sendSuggestion('¿Qué certifiaciones de redes me recomiendas para empezar?')">Certificaciones</button>
+  </div>
+
+  <!-- INPUT -->
+  <div class="chat-input-row">
+    <textarea id="chatInput" placeholder="Pregunta sobre redes, protocolos, seguridad…" rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+    <button id="sendBtn" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+  </div>
+
+</div>
+
+<script>
+/* ─── TOPIC DATA ─── */
+const topics = {
+  osi:{icon:'🖥️',title:'Modelo OSI',subtitle:'Open Systems Interconnection — 7 capas de red',
+    intro:'El Modelo OSI es un marco de referencia creado por ISO que describe cómo los datos viajan a través de una red, dividiéndolo en 7 capas independientes. Cada capa tiene una función específica y se comunica solo con las adyacentes. Es esencial para diagnosticar problemas y entender cualquier protocolo moderno.',
+    concepts:[
+      {name:'Encapsulación',desc:'Agregar cabeceras al descender por cada capa al enviar datos'},
+      {name:'PDU',desc:'Protocol Data Unit: bit, trama, paquete, segmento y datos'},
+      {name:'Comunicación peer',desc:'Cada capa se comunica con su par en el otro extremo de la red'},
+      {name:'Servicios de capa',desc:'Cada capa proporciona servicios a la capa inmediatamente superior'},
+      {name:'Abstracción',desc:'Permite cambiar implementaciones sin afectar otras capas'},
+      {name:'Estandarización',desc:'Permite interoperabilidad entre fabricantes y tecnologías distintas'},
+    ],
+    chips:['IEEE 802','RFC','Wireshark','Troubleshooting','TCP/IP'],
+    videoId:'vv4y_uOneC0',videoNote:'NetworkChuck explica el Modelo OSI visualmente. Activa subtítulos en español.',
+    extraTab:'diagram'},
+  ip:{icon:'📡',title:'Direcciones IP',subtitle:'IPv4, IPv6, CIDR y Subnetting',
+    intro:'Las direcciones IP identifican dispositivos en una red. IPv4 usa 32 bits mientras IPv6 usa 128 bits. El subnetting divide redes en subredes para optimizar el tráfico y la seguridad, usando máscaras y notación CIDR.',
+    concepts:[
+      {name:'IPv4',desc:'32 bits, notación decimal con puntos, ~4300 millones de direcciones'},
+      {name:'IPv6',desc:'128 bits, notación hexadecimal, prácticamente ilimitadas'},
+      {name:'CIDR',desc:'Classless Inter-Domain Routing, notación /24, /16, /8…'},
+      {name:'NAT',desc:'Múltiples hosts internos comparten una sola IP pública'},
+      {name:'Subnetting',desc:'Dividir una red con máscaras para segmentar el tráfico'},
+      {name:'DHCP',desc:'Asignación automática de IP, gateway y DNS a dispositivos'},
+    ],
+    chips:['RFC 1918','Redes privadas','Broadcast','VLSM','ARP','Gateway'],
+    videoId:'s_gy-PJG0jk',videoNote:'Subnetting paso a paso con ejercicios prácticos de notación CIDR.',
+    extraTab:'calc'},
+  security:{icon:'🔐',title:'Ciberseguridad',subtitle:'Defensa, ataques y protección de redes',
+    intro:'La ciberseguridad protege redes, sistemas y datos contra accesos no autorizados y ataques. Abarca defensa preventiva y respuesta ante incidentes. Es la disciplina con más demanda del sector TI a nivel global.',
+    concepts:[
+      {name:'Firewall',desc:'Filtra tráfico según reglas de seguridad configuradas por el admin'},
+      {name:'VPN',desc:'Túnel cifrado para comunicación segura sobre redes públicas'},
+      {name:'IDS / IPS',desc:'Detección y prevención de intrusiones en tiempo real'},
+      {name:'DDoS',desc:'Saturación de recursos con miles de máquinas comprometidas'},
+      {name:'MitM',desc:'Man-in-the-Middle: intercepción de comunicaciones entre dos partes'},
+      {name:'TLS/SSL',desc:'Cifrado de comunicaciones web, base de HTTPS (puerto 443)'},
+    ],
+    chips:['Ethical Hacking','Kali Linux','Pentesting','Zero Trust','OWASP','SOC'],
+    videoId:'inWWhr5tnEA',videoNote:'Fundamentos de ciberseguridad. Ideal antes de avanzar a ethical hacking.'},
+  protocols:{icon:'🌍',title:'Protocolos TCP/IP',subtitle:'La suite de protocolos que mueve Internet',
+    intro:'TCP/IP es la suite sobre la que funciona Internet. TCP garantiza entrega ordenada, UDP prioriza velocidad, DNS resuelve nombres y HTTP/HTTPS permite la web. Juntos forman el lenguaje universal de las redes.',
+    concepts:[
+      {name:'TCP',desc:'Orientado a conexión, garantiza entrega ordenada con confirmaciones'},
+      {name:'UDP',desc:'Sin conexión, rápido y ligero para streaming, gaming y DNS'},
+      {name:'HTTP/HTTPS',desc:'Transferencia de hipertexto para la web (puertos 80 y 443)'},
+      {name:'DNS',desc:'Traduce nombres de dominio (google.com) a direcciones IP'},
+      {name:'DHCP',desc:'Asignación automática de configuración de red a dispositivos'},
+      {name:'ICMP',desc:'Mensajes de control y diagnóstico usados por ping y traceroute'},
+    ],
+    chips:['3-Way Handshake','Puertos','FTP','SMTP','ARP','Socket'],
+    videoId:'OTwp3xtd4dg',videoNote:'Cómo interactúan TCP, UDP, DNS y HTTP en el modelo de 4 capas.'},
+  wifi:{icon:'📶',title:'WiFi & Routers',subtitle:'Redes inalámbricas y configuración avanzada',
+    intro:'WiFi (IEEE 802.11) es la tecnología inalámbrica más usada. Los routers conectan LANs con Internet y permiten configurar NAT, firewall, QoS y VLANs. Fundamental para cualquier administrador de redes.',
+    concepts:[
+      {name:'IEEE 802.11',desc:'Estándares WiFi: 802.11a/b/g/n/ac/ax (WiFi 4/5/6/6E)'},
+      {name:'SSID & Bandas',desc:'Identificador de red, bandas 2.4, 5 y 6 GHz con sus ventajas'},
+      {name:'WPA3',desc:'Protocolo de seguridad inalámbrica más robusto actualmente'},
+      {name:'MIMO / Beamforming',desc:'Múltiples antenas para mayor velocidad y cobertura dirigida'},
+      {name:'QoS',desc:'Priorización de tráfico: voz primero, luego video y datos'},
+      {name:'Mesh Networking',desc:'Redes de malla para cobertura total sin zonas muertas'},
+    ],
+    chips:['Canal WiFi','Interferencias','DMZ','Port Forwarding','802.1X'],
+    videoId:'OxiY4yf6GGg',videoNote:'Cómo funcionan routers WiFi, bandas de frecuencia y optimización de redes.'},
+  switching:{icon:'🔀',title:'Switching & VLANs',subtitle:'Conmutación, segmentación y Spanning Tree',
+    intro:'Los switches operan en Capa 2 del Modelo OSI usando direcciones MAC para reenviar tramas. Las VLANs segmentan lógicamente la red física y el protocolo STP previene loops en topologías con redundancia.',
+    concepts:[
+      {name:'Switch L2',desc:'Reenvía tramas usando tabla de direcciones MAC aprendidas dinámicamente'},
+      {name:'VLAN',desc:'Virtual LAN: segmentación lógica de una misma red física'},
+      {name:'Trunking 802.1Q',desc:'Enlace que transporta múltiples VLANs con etiquetas entre switches'},
+      {name:'STP',desc:'Spanning Tree Protocol: bloquea puertos para evitar bucles'},
+      {name:'RSTP',desc:'Rapid STP: convergencia más rápida ante cambios de topología'},
+      {name:'Port Security',desc:'Limita MACs aprendidas por puerto para prevenir ataques'},
+    ],
+    chips:['802.1Q','PVST+','EtherChannel','CDP','MAC flooding','BPDU'],
+    videoId:'h5OVpyVUdsA',videoNote:'VLANs, trunking 802.1Q y Spanning Tree Protocol explicados visualmente.'},
+  routing:{icon:'🗺️',title:'Routing Dinámico',subtitle:'OSPF, BGP y protocolos de enrutamiento',
+    intro:'El routing dinámico permite a los routers aprender rutas automáticamente. OSPF es el estándar en redes empresariales internas y BGP es el protocolo que conecta todos los sistemas autónomos que forman Internet.',
+    concepts:[
+      {name:'OSPF',desc:'Open Shortest Path First: estado de enlace, usa algoritmo de Dijkstra'},
+      {name:'BGP',desc:'Border Gateway Protocol: enruta entre sistemas autónomos en Internet'},
+      {name:'EIGRP',desc:'Cisco: híbrido entre vector distancia y estado de enlace'},
+      {name:'RIP',desc:'Routing Information Protocol: vector distancia, máximo 15 saltos'},
+      {name:'ASN',desc:'Autonomous System Number: identificador único de cada red en Internet'},
+      {name:'Métrica',desc:'Valor que determina la mejor ruta: costo, ancho de banda, saltos'},
+    ],
+    chips:['Tabla de rutas','IGP','EGP','MPLS','Redistribución','Dijkstra'],
+    videoId:'A1gyRM_5a0Q',videoNote:'OSPF y BGP: cómo funcionan y cuál usa cada parte de Internet.'},
+  cabling:{icon:'🔌',title:'Cableado Estructurado',subtitle:'Normas TIA/EIA, categorías y fibra óptica',
+    intro:'El cableado estructurado es la infraestructura física que soporta redes de datos y voz. Las normas TIA/EIA-568 definen categorías de cables de cobre, distancias máximas y topologías. La fibra óptica permite velocidades altas a largas distancias.',
+    concepts:[
+      {name:'Cat 5e / Cat 6',desc:'Par trenzado: Cat 6 soporta hasta 10 Gbps en distancias de 55m'},
+      {name:'Cat 6A',desc:'Augmented Cat 6: 10 Gbps a 100m, mejor blindaje contra interferencias'},
+      {name:'Fibra monomodo',desc:'SMF: largas distancias hasta 100 km con un solo modo de luz'},
+      {name:'Fibra multimodo',desc:'MMF: distancias cortas hasta 550m con múltiples modos de luz'},
+      {name:'Patch Panel',desc:'Centraliza y organiza el cableado horizontal en el rack'},
+      {name:'TIA-568',desc:'Estándar que define colores RJ-45: 568A y 568B'},
+    ],
+    chips:['RJ-45','568A/568B','MDF/IDF','Backbone','UTP/STP','SC/LC','ANSI'],
+    videoId:'SqisgFNy8GI',videoNote:'Cableado estructurado completo: categorías, normas TIA, fibra vs cobre.'},
+  cloud:{icon:'☁️',title:'Cloud Networking',subtitle:'Redes en AWS, Azure y Google Cloud',
+    intro:'Cloud networking implementa redes en entornos de nube pública. AWS, Azure y GCP ofrecen VPCs con subnets, grupos de seguridad, balanceadores de carga y conectividad global. Es la base de la infraestructura moderna y del DevOps.',
+    concepts:[
+      {name:'VPC / VNet',desc:'Virtual Private Cloud: red completamente aislada dentro del proveedor'},
+      {name:'Subnets',desc:'Segmentos públicos y privados con sus propias tablas de rutas'},
+      {name:'Security Groups',desc:'Firewall virtual por instancia con reglas de entrada y salida'},
+      {name:'Load Balancer',desc:'Distribuye tráfico entre instancias para alta disponibilidad'},
+      {name:'CDN',desc:'Content Delivery Network: cachea contenido cerca del usuario final'},
+      {name:'VPN / Direct Connect',desc:'Conexión cifrada o dedicada entre on-premise y la nube'},
+    ],
+    chips:['AWS','Azure','GCP','Terraform','SD-WAN','Peering','NAT Gateway'],
+    videoId:'M988_fsOSWo',videoNote:'VPCs en AWS, subnets, security groups y arquitecturas cloud básicas.'},
+};
+
+const osiLayers = [
+  {n:7,cls:'l7',name:'Capa 7 — Aplicación',proto:'HTTP · FTP · SMTP · DNS',
+    desc:'Capa más cercana al usuario. Proporciona interfaces para que las aplicaciones accedan a los servicios de red. No es la app en sí, sino el protocolo que usa para comunicarse.',
+    pdu:'Datos',tags:['HTTP','HTTPS','FTP','SMTP','POP3','DNS','DHCP','SSH','Telnet']},
+  {n:6,cls:'l6',name:'Capa 6 — Presentación',proto:'SSL/TLS · JPEG · ASCII',
+    desc:'Traduce, cifra y comprime los datos para que la capa de aplicación los entienda. Responsable del cifrado TLS/SSL que protege HTTPS.',
+    pdu:'Datos',tags:['SSL','TLS','Cifrado','Compresión','JPEG','UTF-8','ASCII']},
+  {n:5,cls:'l5',name:'Capa 5 — Sesión',proto:'NetBIOS · RPC · NFS',
+    desc:'Gestiona el establecimiento, mantenimiento y cierre de sesiones entre aplicaciones. Controla el diálogo (full-duplex vs half-duplex) y la sincronización.',
+    pdu:'Datos',tags:['NetBIOS','RPC','NFS','Sockets','SAP','SDP']},
+  {n:4,cls:'l4',name:'Capa 4 — Transporte',proto:'TCP · UDP · SCTP',
+    desc:'Proporciona transferencia confiable (TCP) o rápida sin garantías (UDP). Usa puertos para identificar procesos y realiza control de flujo y errores.',
+    pdu:'Segmento (TCP) / Datagrama (UDP)',tags:['TCP','UDP','Puertos','3-Way Handshake','Segmentación','Control de flujo']},
+  {n:3,cls:'l3',name:'Capa 3 — Red',proto:'IP · ICMP · OSPF · BGP',
+    desc:'Direccionamiento lógico (IP) y enrutamiento de paquetes entre redes. Los routers operan aquí. Determina la mejor ruta hacia el destino.',
+    pdu:'Paquete',tags:['IPv4','IPv6','Router','ICMP','ARP','OSPF','BGP','NAT']},
+  {n:2,cls:'l2',name:'Capa 2 — Enlace de Datos',proto:'Ethernet · WiFi · VLAN',
+    desc:'Organiza bits en tramas y gestiona el acceso al medio. Usa direcciones MAC para identificar dispositivos en la misma LAN. Los switches operan aquí.',
+    pdu:'Trama',tags:['Ethernet','MAC','Switch','VLAN','STP','802.11','PPP']},
+  {n:1,cls:'l1',name:'Capa 1 — Física',proto:'Ethernet físico · WiFi RF · Fibra',
+    desc:'Define las especificaciones eléctricas y mecánicas del medio: cables, conectores, voltajes, frecuencias y sincronización de bits.',
+    pdu:'Bits (0 y 1)',tags:['Cables','Fibra','Voltajes','Hub','Repetidor','RJ-45','SFP']},
+];
+
+/* ─── MODAL ─── */
+function openModal(key){
+  const t=topics[key]; if(!t) return;
+  document.getElementById('modalIcon').textContent=t.icon;
+  document.getElementById('modalTitle').textContent=t.title;
+  document.getElementById('modalSubtitle').textContent=t.subtitle;
+  document.getElementById('modalIntro').textContent=t.intro;
+  document.getElementById('modalConcepts').innerHTML=t.concepts.map(c=>`
+    <div class="concept-item"><div class="concept-dot"></div>
+    <div><strong>${c.name}</strong><span>${c.desc}</span></div></div>`).join('');
+  document.getElementById('modalChips').innerHTML=t.chips.map(c=>
+    `<span class="chip"><i class="fas fa-hashtag"></i>${c}</span>`).join('');
+  document.getElementById('modalVideo').src='';
+  document.getElementById('modalVideoNote').textContent=t.videoNote;
+  document.getElementById('modal').dataset.topic=key;
+  document.getElementById('tab-diagram').classList.toggle('hidden',t.extraTab!=='diagram');
+  document.getElementById('tab-calc').classList.toggle('hidden',t.extraTab!=='calc');
+  if(t.extraTab==='diagram') buildOSIDiagram();
+  document.getElementById('calcResults').classList.remove('visible');
+  document.getElementById('calcError').style.display='none';
+  switchTab('content');
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow='';
+  document.getElementById('modalVideo').src='';
+}
+function switchTab(tab){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.modal-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(`panel-${tab}`).classList.add('active');
+  document.getElementById(`tab-${tab}`).classList.add('active');
+  if(tab==='video'){
+    const id=topics[document.getElementById('modal').dataset.topic]?.videoId;
+    if(id) document.getElementById('modalVideo').src=`https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1`;
+  }
+}
+document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+/* ─── OSI ─── */
+function buildOSIDiagram(){
+  document.getElementById('osiDiagram').innerHTML=osiLayers.map(l=>`
+    <div class="osi-layer ${l.cls}" id="osi-l${l.n}" onclick="toggleOSI(${l.n})">
+      <div class="osi-layer-header">
+        <div class="osi-num">${l.n}</div>
+        <div class="osi-name">${l.name}</div>
+        <div class="osi-proto">${l.proto}</div>
+        <i class="fas fa-chevron-down osi-arrow"></i>
+      </div>
+      <div class="osi-detail"><div class="osi-detail-inner">
+        <p>${l.desc}</p>
+        <p style="font-size:12px;margin-bottom:9px;"><strong style="color:var(--text)">PDU:</strong> <span style="color:var(--text-muted)">${l.pdu}</span></p>
+        <div class="osi-tags">${l.tags.map(t=>`<span class="osi-tag ${l.cls}">${t}</span>`).join('')}</div>
+      </div></div>
+    </div>`).join('');
+}
+function toggleOSI(n){
+  const el=document.getElementById(`osi-l${n}`);
+  const open=el.classList.contains('open');
+  document.querySelectorAll('.osi-layer').forEach(l=>l.classList.remove('open'));
+  if(!open) el.classList.add('open');
+}
+
+/* ─── SUBNET CALCULATOR ─── */
+function calcSubnet(){
+  const ipStr=document.getElementById('calcIP').value.trim();
+  const prefix=parseInt(document.getElementById('calcCIDR').value);
+  const errEl=document.getElementById('calcError');
+  const resEl=document.getElementById('calcResults');
+  errEl.style.display='none'; resEl.classList.remove('visible');
+  const parts=ipStr.split('.');
+  if(parts.length!==4||parts.some(p=>p===''||isNaN(p)||+p<0||+p>255)){
+    errEl.textContent='❌ IP inválida. Usa el formato: 192.168.1.0';
+    errEl.style.display='block'; return;
+  }
+  const ip32=parts.reduce((a,p)=>(a<<8)|+p,0)>>>0;
+  const mask32=prefix===0?0:(~0<<(32-prefix))>>>0;
+  const wild32=(~mask32)>>>0;
+  const net32=(ip32&mask32)>>>0;
+  const bcast32=(net32|wild32)>>>0;
+  const first32=prefix<31?(net32+1)>>>0:net32;
+  const last32 =prefix<31?(bcast32-1)>>>0:bcast32;
+  const total=Math.pow(2,32-prefix);
+  const usable=prefix<=30?total-2:(prefix===31?2:1);
+  const n2ip=n=>[(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255].join('.');
+  document.getElementById('resNetwork').textContent =n2ip(net32);
+  document.getElementById('resBroadcast').textContent=n2ip(bcast32);
+  document.getElementById('resFirst').textContent   =prefix<31?n2ip(first32):'N/A';
+  document.getElementById('resLast').textContent    =prefix<31?n2ip(last32) :'N/A';
+  document.getElementById('resMask').textContent    =n2ip(mask32);
+  document.getElementById('resWild').textContent    =n2ip(wild32);
+  document.getElementById('resTotal').textContent   =total.toLocaleString();
+  document.getElementById('resUsable').textContent  =usable>0?usable.toLocaleString():'0';
+  resEl.classList.add('visible');
+}
+document.getElementById('calcIP').addEventListener('keydown',e=>{if(e.key==='Enter')calcSubnet();});
+
+/* ─── GLOSSARY ─── */
+const glossaryData=[
+  {term:'ACK',def:'Acknowledgment: señal que TCP envía para confirmar que un segmento fue recibido correctamente.'},
+  {term:'ARP',def:'Address Resolution Protocol: traduce direcciones IP a MACs dentro de la misma red local.'},
+  {term:'BGP',def:'Border Gateway Protocol: protocolo de enrutamiento externo que interconecta sistemas autónomos en Internet.'},
+  {term:'Broadcast',def:'Transmisión enviada simultáneamente a todos los dispositivos de una red o subred.'},
+  {term:'CIDR',def:'Classless Inter-Domain Routing: notación de prefijo (/24) para definir rangos IP sin clases fijas.'},
+  {term:'DHCP',def:'Dynamic Host Configuration Protocol: asigna automáticamente IPs, máscara, gateway y DNS.'},
+  {term:'DMZ',def:'Demilitarized Zone: red separada donde se ubican servidores accesibles desde Internet.'},
+  {term:'DNS',def:'Domain Name System: resuelve nombres de dominio a direcciones IP y viceversa.'},
+  {term:'DDoS',def:'Distributed Denial of Service: satura un servidor usando miles de máquinas comprometidas.'},
+  {term:'Encapsulación',def:'Agregar cabeceras de protocolo a los datos al descender por las capas del Modelo OSI.'},
+  {term:'Ethernet',def:'Tecnología LAN basada en IEEE 802.3 que usa tramas y direcciones MAC para comunicarse.'},
+  {term:'Firewall',def:'Filtra tráfico de red según reglas de seguridad definidas por el administrador.'},
+  {term:'FTP',def:'File Transfer Protocol: transfiere archivos entre cliente y servidor usando puertos 20 y 21.'},
+  {term:'Gateway',def:'Puerta de enlace predeterminada; router al que se envían paquetes hacia redes externas.'},
+  {term:'HTTP / HTTPS',def:'Hypertext Transfer Protocol (Secure): protocolo de comunicación web en los puertos 80 y 443.'},
+  {term:'ICMP',def:'Internet Control Message Protocol: protocolo de diagnóstico usado por ping y traceroute.'},
+  {term:'IDS / IPS',def:'Intrusion Detection/Prevention System: detecta o bloquea actividad maliciosa en tiempo real.'},
+  {term:'IPv4',def:'Protocolo de Internet versión 4: 32 bits, notación decimal a.b.c.d, ~4300 millones de direcciones.'},
+  {term:'IPv6',def:'Versión 6 de IP: 128 bits en notación hexadecimal, prácticamente ilimitadas direcciones.'},
+  {term:'LAN',def:'Local Area Network: red de área local que conecta dispositivos en un área geográfica reducida.'},
+  {term:'MAC Address',def:'Dirección física de 48 bits grabada en la tarjeta de red (ej: AA:BB:CC:11:22:33).'},
+  {term:'MTU',def:'Maximum Transmission Unit: tamaño máximo de un paquete sin fragmentación (Ethernet: 1500 bytes).'},
+  {term:'NAT',def:'Network Address Translation: múltiples dispositivos comparten una sola dirección IP pública.'},
+  {term:'OSPF',def:'Open Shortest Path First: protocolo de estado de enlace que usa el algoritmo de Dijkstra.'},
+  {term:'PDU',def:'Protocol Data Unit: nombre de la unidad de datos por capa OSI (bit, trama, paquete, segmento).'},
+  {term:'Ping',def:'Usa ICMP para medir latencia y verificar conectividad entre dos dispositivos de red.'},
+  {term:'Puerto',def:'Número de 16 bits que identifica un servicio o proceso en un host (ej: 80 HTTP, 22 SSH).'},
+  {term:'Router',def:'Dispositivo de Capa 3 que reenvía paquetes entre redes usando la tabla de enrutamiento.'},
+  {term:'STP',def:'Spanning Tree Protocol (IEEE 802.1D): evita bucles en redes con switches redundantes.'},
+  {term:'Subnet',def:'División lógica de una red IP con máscara de subred para segmentar y organizar el tráfico.'},
+  {term:'Switch',def:'Dispositivo de Capa 2 que reenvía tramas usando la tabla de direcciones MAC.'},
+  {term:'TCP',def:'Transmission Control Protocol: orientado a conexión, garantiza entrega ordenada y sin errores.'},
+  {term:'Traceroute',def:'Muestra el camino (saltos) que sigue un paquete desde el origen hasta el destino.'},
+  {term:'UDP',def:'User Datagram Protocol: sin conexión, más rápido que TCP; usado en streaming y DNS.'},
+  {term:'VLAN',def:'Virtual LAN: segmentación lógica de una red física usando etiquetas 802.1Q en switches.'},
+  {term:'VPN',def:'Virtual Private Network: túnel cifrado sobre una red pública para comunicación segura.'},
+  {term:'WAN',def:'Wide Area Network: red de área amplia que conecta múltiples LANs a través de grandes distancias.'},
+  {term:'WiFi',def:'Tecnología inalámbrica basada en IEEE 802.11 para conectar dispositivos sin cables.'},
+  {term:'OSPF Area',def:'División lógica de una red OSPF; el Área 0 (backbone) conecta todas las demás áreas.'},
+];
+
+function renderGlossary(filter=''){
+  const grid=document.getElementById('glossaryGrid');
+  const q=filter.toLowerCase();
+  const filtered=glossaryData.filter(g=>g.term.toLowerCase().includes(q)||g.def.toLowerCase().includes(q));
+  if(!filtered.length){
+    grid.innerHTML=`<div class="gloss-empty"><i class="fas fa-search" style="display:block;font-size:30px;margin-bottom:12px;color:var(--primary)"></i>Sin resultados para "<strong>${filter}</strong>"</div>`;
+    return;
+  }
+  grid.innerHTML=filtered.map(g=>`
+    <div class="gloss-card">
+      <div class="gloss-term"><i class="fas fa-angle-right"></i>${g.term}</div>
+      <div class="gloss-def">${g.def}</div>
+    </div>`).join('');
+}
+function filterGlossary(){renderGlossary(document.getElementById('glossSearch').value);}
+renderGlossary();
+
+/* ─── NAV ─── */
+const hamburger=document.getElementById('hamburger'),navMenu=document.getElementById('navMenu'),navOverlay=document.getElementById('navOverlay');
+function toggleMenu(open){
+  hamburger.classList.toggle('open',open);navMenu.classList.toggle('open',open);
+  navOverlay.classList.toggle('open',open);document.body.style.overflow=open?'hidden':'';
+}
+hamburger.addEventListener('click',()=>toggleMenu(!navMenu.classList.contains('open')));
+hamburger.addEventListener('keydown',e=>{if(e.key==='Enter')toggleMenu(!navMenu.classList.contains('open'));});
+navOverlay.addEventListener('click',()=>toggleMenu(false));
+navMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>toggleMenu(false)));
+
+/* ─── SCROLL ─── */
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
+  const pct=(window.scrollY/(document.body.scrollHeight-window.innerHeight))*100;
+  document.getElementById('progressBar').style.width=Math.min(pct,100)+'%';
+  const secs=document.querySelectorAll('section[id]'),links=document.querySelectorAll('nav ul li a');
+  let cur='';secs.forEach(s=>{if(scrollY>=s.offsetTop-200)cur=s.id;});
+  links.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')===`#${cur}`)l.classList.add('active');});
+});
+function scrollToSection(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'});}
+document.querySelectorAll('nav ul li a').forEach(l=>{
+  l.addEventListener('click',e=>{e.preventDefault();scrollToSection(l.getAttribute('href').substring(1));});
+});
+
+/* ═════════════════════════════════════
+   CHATBOT IA — N8N WEBHOOK
+═════════════════════════════════════ */
+const N8N_WEBHOOK = 'https://bimolecularly-semisentimental-ma.ngrok-free.dev/webhook/web-chat';
+
+// sessionId único por pestaña para que n8n mantenga contexto por usuario
+const SESSION_ID = 'nv_' + Math.random().toString(36).slice(2, 11);
+
+let chatOpen = false;
+let isBotTyping = false;
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  document.getElementById('chatWindow').classList.toggle('open', chatOpen);
+  document.getElementById('chatBtn').classList.toggle('open', chatOpen);
+  if (chatOpen) setTimeout(() => document.getElementById('chatInput').focus(), 350);
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+}
+
+function addMessage(text, role, isHTML = false) {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = `msg ${role}`;
+  if (isHTML) div.innerHTML = text;
+  else div.textContent = text;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  return div;
+}
+
+function showTyping() {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'msg typing';
+  div.id = 'typingIndicator';
+  div.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function removeTyping() {
+  document.getElementById('typingIndicator')?.remove();
+}
+
+function sendSuggestion(text) {
+  document.getElementById('chatInput').value = text;
+  sendMessage();
+}
+
+function formatBotText(text) {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/`([^`]+)`/g, '<code style="background:rgba(56,189,248,.15);padding:1px 5px;border-radius:4px;font-size:12px;">$1</code>')
+    .replace(/\n/g, '<br>');
+}
+
+async function sendMessage() {
+  if (isBotTyping) return;
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+
+  addMessage(text, 'user');
+  input.value = '';
+  input.style.height = 'auto';
+
+  // Ocultar sugerencias tras primer uso
+  const suggestions = document.getElementById('chatSuggestions');
+  if (suggestions) suggestions.style.display = 'none';
+
+  isBotTyping = true;
+  document.getElementById('sendBtn').disabled = true;
+  showTyping();
+
+  try {
+    const response = await fetch(N8N_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chatInput: text,
+        sessionId: SESSION_ID
+      })
+    });
+
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+    // n8n puede responder como array o como objeto
+    const raw = await response.json();
+    const data = Array.isArray(raw) ? raw[0] : raw;
+
+    // Intentar extraer la respuesta del campo más común de n8n
+    const botText =
+      data?.output ??
+      data?.text ??
+      data?.message ??
+      data?.response ??
+      data?.answer ??
+      data?.chatOutput ??
+      (typeof data === 'string' ? data : null) ??
+      'Sin respuesta del workflow.';
+
+    removeTyping();
+    addMessage(formatBotText(String(botText)), 'bot', true);
+
+  } catch (err) {
+    removeTyping();
+    let msg = '❌ No se pudo conectar con el workflow de n8n.';
+    if (err.message.includes('Failed to fetch')) {
+      msg = '🌐 Error de red. ¿Está activo el tunnel de ngrok y el workflow en n8n?';
+    } else if (err.message.includes('HTTP 4') || err.message.includes('HTTP 5')) {
+      msg = `⚠️ El webhook respondió con error (${err.message}). Verifica que el workflow esté activado en n8n.`;
+    }
+    addMessage(msg, 'bot', true);
+  } finally {
+    isBotTyping = false;
+    document.getElementById('sendBtn').disabled = false;
+  }
+}
+</script>
+</body>
+</html>
