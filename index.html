@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="NetVision Pro - Aprende redes, protocolos, ciberseguridad y telecomunicaciones de forma interactiva.">
-<title>NetVision Pro</title>
+<meta name="description" content="Conecta Lab — Aprende redes, protocolos, ciberseguridad y telecomunicaciones de forma interactiva.">
+<title>Conecta Lab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -30,6 +30,7 @@ body::before{content:'';position:fixed;inset:0;
 .progress-bar{position:fixed;top:0;left:0;width:0;height:3px;
   background:linear-gradient(90deg,var(--primary),var(--accent));z-index:1001;transition:width .2s;}
 
+/* ── NAV ── */
 nav{position:fixed;top:0;left:0;width:100%;padding:18px 6%;
   display:flex;justify-content:space-between;align-items:center;
   background:rgba(7,17,31,.95);backdrop-filter:blur(20px);
@@ -53,6 +54,8 @@ nav ul li a:hover{color:var(--primary);}
 .hamburger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg);}
 .hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
 .hamburger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg);}
+.nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1040;}
+.nav-overlay.open{display:block;}
 @media(max-width:768px){
   .hamburger{display:flex;}
   nav ul{position:fixed;top:0;right:-100%;width:75%;max-width:300px;height:100vh;
@@ -62,15 +65,14 @@ nav ul li a:hover{color:var(--primary);}
     transition:right .4s cubic-bezier(.23,1,.32,1);z-index:1050;}
   nav ul.open{right:0;}
   nav ul li a{font-size:20px;}
-  .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1040;}
-  .nav-overlay.open{display:block;}
 }
 
+/* ── HERO ── */
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;
   text-align:center;padding:140px 6% 100px;
   background:linear-gradient(135deg,rgba(7,17,31,.95) 0%,rgba(2,6,23,.98) 100%),
     url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1600&auto=format&fit=crop');
-  background-size:cover;background-position:center;background-attachment:fixed;
+  background-size:cover;background-position:center;
   position:relative;overflow:hidden;}
 .hero::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
   background:linear-gradient(90deg,transparent,rgba(56,189,248,.06),transparent);
@@ -97,6 +99,7 @@ nav ul li a:hover{color:var(--primary);}
 .btn-secondary{background:transparent;border:2px solid var(--primary);color:var(--primary);}
 .btn-secondary:hover{background:var(--primary);color:var(--dark);transform:translateY(-7px) scale(1.05);}
 
+/* ── LAYOUT ── */
 .container{width:90%;max-width:1400px;margin:auto;}
 .section{padding:120px 0;}
 .section-title{text-align:center;margin-bottom:70px;}
@@ -108,6 +111,22 @@ nav ul li a:hover{color:var(--primary);}
   width:70px;height:4px;background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:2px;}
 .section-title p{color:var(--text-muted);font-size:17px;margin-top:20px;}
 
+/* ── INTRO VIDEO ── */
+.intro-video-section{background:linear-gradient(135deg,rgba(56,189,248,.04),rgba(124,58,237,.04));
+  border-top:1px solid var(--glass-border);border-bottom:1px solid var(--glass-border);padding:80px 0;}
+.intro-video-wrap{max-width:860px;margin:0 auto;}
+.intro-video-label{display:inline-flex;align-items:center;gap:8px;
+  background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.25);
+  border-radius:20px;padding:5px 16px;font-size:12px;font-weight:700;
+  color:var(--primary);margin-bottom:20px;letter-spacing:.5px;text-transform:uppercase;}
+.intro-video-title{font-size:clamp(22px,3.5vw,36px);font-weight:800;margin-bottom:10px;letter-spacing:-.5px;}
+.intro-video-desc{color:var(--text-muted);font-size:15px;margin-bottom:28px;line-height:1.7;}
+.intro-yt{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;
+  border-radius:20px;background:#000;
+  box-shadow:0 24px 60px rgba(0,0,0,.6),0 0 0 1px rgba(56,189,248,.12);}
+.intro-yt iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:20px;}
+
+/* ── CARDS ── */
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:30px;}
 .card{background:var(--glass);border:1px solid var(--glass-border);border-radius:26px;
   padding:36px 28px;transition:transform .4s ease,box-shadow .4s ease,border-color .4s ease;
@@ -127,13 +146,11 @@ nav ul li a:hover{color:var(--primary);}
   display:inline-flex;align-items:center;gap:8px;font-family:'Poppins',sans-serif;}
 .card-btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(56,189,248,.4);}
 
+/* ── INFO ── */
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
 .info-img{position:relative;border-radius:28px;overflow:hidden;}
 .info-img img{width:100%;border-radius:28px;box-shadow:0 20px 60px var(--shadow);transition:transform .5s;display:block;}
 .info-img:hover img{transform:scale(1.04);}
-.info-img::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(56,189,248,.15),transparent);
-  border-radius:28px;opacity:0;transition:opacity .3s;}
-.info-img:hover::after{opacity:1;}
 .info-text h2{font-size:clamp(30px,4vw,46px);margin-bottom:20px;
   background:linear-gradient(135deg,var(--primary),var(--accent));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
@@ -148,29 +165,14 @@ nav ul li a:hover{color:var(--primary);}
   .benefit-list li{justify-content:center;}
 }
 
-.glossary-search-wrap{max-width:580px;margin:0 auto 46px;position:relative;}
-.glossary-search{width:100%;padding:15px 22px 15px 50px;
-  background:rgba(255,255,255,.05);border:1px solid rgba(56,189,248,.22);
-  border-radius:50px;color:var(--text);font-size:16px;font-family:'Poppins',sans-serif;
-  outline:none;transition:all .3s;}
-.glossary-search::placeholder{color:var(--text-muted);}
-.glossary-search:focus{border-color:var(--primary);background:rgba(56,189,248,.07);box-shadow:0 0 0 4px rgba(56,189,248,.12);}
-.search-icon{position:absolute;left:19px;top:50%;transform:translateY(-50%);color:var(--primary);font-size:15px;pointer-events:none;}
-.glossary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
-.gloss-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;
-  padding:18px 20px;transition:all .3s;}
-.gloss-card:hover{border-color:rgba(56,189,248,.35);background:rgba(56,189,248,.06);transform:translateY(-4px);}
-.gloss-term{font-size:14px;font-weight:700;color:var(--primary);margin-bottom:6px;display:flex;align-items:center;gap:7px;}
-.gloss-term i{font-size:11px;opacity:.7;}
-.gloss-def{font-size:13px;color:var(--text-muted);line-height:1.65;}
-.gloss-empty{text-align:center;padding:50px;color:var(--text-muted);font-size:16px;grid-column:1/-1;}
-
+/* ── FOOTER ── */
 footer{margin-top:80px;background:var(--dark-2);padding:50px 0 28px;
   text-align:center;border-top:1px solid var(--glass-border);position:relative;}
 footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
   background:linear-gradient(90deg,transparent,var(--primary),var(--accent),transparent);}
 footer p{color:var(--text-muted);font-size:15px;}
 
+/* ── MODAL ── */
 .modal-overlay{position:fixed;inset:0;background:rgba(2,6,23,.88);backdrop-filter:blur(14px);
   z-index:2000;display:flex;align-items:center;justify-content:center;padding:16px;
   opacity:0;pointer-events:none;transition:opacity .35s;}
@@ -195,7 +197,7 @@ footer p{color:var(--text-muted);font-size:15px;}
   display:flex;align-items:center;justify-content:center;transition:all .3s;flex-shrink:0;}
 .modal-close:hover{background:rgba(239,68,68,.2);border-color:rgba(239,68,68,.4);color:#ef4444;transform:rotate(90deg);}
 .modal-tabs{display:flex;gap:3px;padding:13px 28px 0;
-  border-bottom:1px solid rgba(255,255,255,.07);flex-shrink:0;overflow-x:auto;}
+  border-bottom:1px solid rgba(255,255,255,.07);flex-shrink:0;overflow-x:auto;background:rgba(10,21,40,.6);}
 .modal-tabs::-webkit-scrollbar{height:0;}
 .modal-tab{padding:9px 18px;border-radius:10px 10px 0 0;border:none;
   background:transparent;color:var(--text-muted);cursor:pointer;
@@ -213,6 +215,7 @@ footer p{color:var(--text-muted);font-size:15px;}
 .tab-panel{padding:24px 28px 28px;display:none;}
 .tab-panel.active{display:block;}
 
+/* ── CONTENT ── */
 .topic-intro{font-size:15px;color:var(--text-muted);line-height:1.85;margin-bottom:24px;}
 .concepts-title{font-size:16px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:9px;}
 .concepts-title i{color:var(--primary);}
@@ -233,6 +236,7 @@ footer p{color:var(--text-muted);font-size:15px;}
   display:flex;align-items:center;gap:5px;transition:all .3s;}
 .chip:hover{border-color:var(--primary);color:var(--primary);background:rgba(56,189,248,.07);}
 
+/* ── VIDEO ── */
 .video-container{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;
   border-radius:13px;background:#000;margin-bottom:16px;}
 .video-container iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:13px;}
@@ -241,6 +245,7 @@ footer p{color:var(--text-muted);font-size:15px;}
   display:flex;gap:9px;}
 .video-note i{color:var(--primary);flex-shrink:0;margin-top:2px;}
 
+/* ── OSI DIAGRAM ── */
 .osi-hint{text-align:center;color:var(--text-muted);font-size:13px;margin-bottom:14px;
   display:flex;align-items:center;justify-content:center;gap:7px;}
 .osi-hint i{color:var(--primary);}
@@ -259,7 +264,6 @@ footer p{color:var(--text-muted);font-size:15px;}
 .osi-detail p{font-size:13px;color:var(--text-muted);line-height:1.7;margin-bottom:9px;}
 .osi-tags{display:flex;flex-wrap:wrap;gap:6px;}
 .osi-tag{padding:3px 11px;border-radius:11px;font-size:11px;font-weight:600;color:#fff;}
-
 .l7{background:rgba(249,115,22,.08);border-color:rgba(249,115,22,.2);}
 .l7 .osi-num{background:linear-gradient(135deg,#f97316,#ea580c);}
 .l7 .osi-tag{background:rgba(249,115,22,.25);color:#fb923c;}
@@ -289,18 +293,17 @@ footer p{color:var(--text-muted);font-size:15px;}
 .l1 .osi-tag{background:rgba(236,72,153,.25);color:#f472b6;}
 .l1.open,.l1:hover{background:rgba(236,72,153,.12);border-color:rgba(236,72,153,.4);}
 
+/* ── CALC ── */
 .calc-wrap{max-width:520px;margin:0 auto;}
 .calc-title{font-size:16px;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:9px;}
 .calc-title i{color:var(--primary);}
 .calc-row{display:grid;grid-template-columns:1fr auto auto;gap:12px;margin-bottom:16px;align-items:end;}
 .calc-field{display:flex;flex-direction:column;gap:6px;}
 .calc-field label{font-size:12px;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
-.calc-field input,.calc-field select{
-  padding:11px 15px;background:rgba(255,255,255,.06);
+.calc-field input,.calc-field select{padding:11px 15px;background:rgba(255,255,255,.06);
   border:1px solid rgba(56,189,248,.2);border-radius:11px;
   color:var(--text);font-size:15px;font-family:'Poppins',sans-serif;outline:none;transition:all .3s;}
-.calc-field input:focus,.calc-field select:focus{
-  border-color:var(--primary);background:rgba(56,189,248,.08);box-shadow:0 0 0 3px rgba(56,189,248,.12);}
+.calc-field input:focus,.calc-field select:focus{border-color:var(--primary);background:rgba(56,189,248,.08);box-shadow:0 0 0 3px rgba(56,189,248,.12);}
 .calc-field select option{background:#0d1f38;}
 .calc-btn{padding:11px 22px;border:none;border-radius:11px;
   background:linear-gradient(135deg,var(--primary),var(--secondary));
@@ -313,269 +316,198 @@ footer p{color:var(--text-muted);font-size:15px;}
   border-radius:14px;padding:18px;display:none;}
 .calc-results.visible{display:block;animation:fadeIn .3s ease;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.calc-header-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+.calc-res-label{font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;}
+.copy-btn{padding:5px 13px;border:1px solid rgba(56,189,248,.25);border-radius:8px;
+  background:transparent;color:var(--primary);font-size:11px;font-weight:700;cursor:pointer;
+  font-family:'Poppins',sans-serif;transition:all .25s;display:flex;align-items:center;gap:5px;}
+.copy-btn:hover{background:rgba(56,189,248,.1);}
+.copy-btn.copied{color:#4ade80;border-color:rgba(74,222,128,.3);}
 .calc-result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .calc-result-item{background:rgba(0,0,0,.2);border-radius:11px;padding:12px 14px;}
 .calc-result-item label{font-size:10px;color:var(--text-muted);font-weight:700;
   text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;}
 .calc-result-item span{font-size:14px;font-weight:700;color:var(--primary);font-family:monospace;}
 
-/* ═══════════════════════════════════════
-   CHATBOT IA
-═══════════════════════════════════════ */
-#chatBtn {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 62px;
-  height: 62px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 8px 32px rgba(56,189,248,.45), 0 0 0 0 rgba(56,189,248,.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 26px;
-  z-index: 3000;
-  transition: transform .3s, box-shadow .3s;
-  animation: pulse-ring 2.5s ease-in-out infinite;
-}
-@keyframes pulse-ring {
-  0%,100% { box-shadow: 0 8px 32px rgba(56,189,248,.45), 0 0 0 0 rgba(56,189,248,.35); }
-  50%      { box-shadow: 0 8px 32px rgba(56,189,248,.45), 0 0 0 14px rgba(56,189,248,0); }
-}
-#chatBtn:hover { transform: scale(1.1); }
-#chatBtn.open  { animation: none; transform: scale(1.05); box-shadow: 0 12px 40px rgba(56,189,248,.6); }
+/* ── QUIZ ── */
+.quiz-wrap{max-width:560px;margin:0 auto;}
+.quiz-top-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;gap:12px;}
+.quiz-progress-bar-bg{flex:1;height:4px;background:rgba(255,255,255,.08);border-radius:2px;}
+.quiz-progress-fill{height:4px;border-radius:2px;background:linear-gradient(90deg,var(--primary),var(--accent));transition:width .4s ease;}
+.quiz-counter{font-size:11px;color:var(--text-muted);font-weight:700;font-family:monospace;white-space:nowrap;}
+.quiz-ai-btn{padding:5px 13px;border:1px solid rgba(56,189,248,.25);border-radius:14px;
+  background:rgba(56,189,248,.07);color:var(--primary);font-size:11px;font-weight:700;cursor:pointer;
+  font-family:'Poppins',sans-serif;transition:all .25s;display:flex;align-items:center;gap:5px;white-space:nowrap;}
+.quiz-ai-btn:hover{background:rgba(56,189,248,.15);}
+.quiz-ai-btn:disabled{opacity:.5;cursor:not-allowed;}
+.quiz-loading{text-align:center;padding:36px 20px;color:var(--text-muted);}
+.quiz-loading i{font-size:28px;color:var(--primary);display:block;margin-bottom:12px;animation:spin 1s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.quiz-question{font-size:16px;font-weight:700;line-height:1.55;margin-bottom:18px;letter-spacing:-.2px;}
+.quiz-options{display:flex;flex-direction:column;gap:9px;}
+.quiz-opt{padding:12px 16px;border:1px solid var(--glass-border);border-radius:11px;
+  background:rgba(255,255,255,.03);cursor:pointer;font-size:13.5px;font-weight:500;
+  transition:all .25s;text-align:left;font-family:'Poppins',sans-serif;color:var(--text);}
+.quiz-opt:hover:not(:disabled){border-color:rgba(56,189,248,.35);background:rgba(56,189,248,.06);}
+.quiz-opt:disabled{cursor:not-allowed;}
+.quiz-opt.correct{border-color:rgba(74,222,128,.5);background:rgba(74,222,128,.09);color:#4ade80;}
+.quiz-opt.wrong{border-color:rgba(248,113,113,.5);background:rgba(248,113,113,.09);color:#f87171;}
+.quiz-opt.reveal{border-color:rgba(74,222,128,.2);background:rgba(74,222,128,.04);color:var(--text-muted);}
+.quiz-feedback{margin-top:14px;padding:11px 14px;border-radius:10px;font-size:13px;line-height:1.6;display:none;}
+.quiz-feedback.show{display:block;animation:fadeIn .2s ease;}
+.quiz-feedback.ok{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.22);color:#86efac;}
+.quiz-feedback.fail{background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.22);color:#fca5a5;}
+.quiz-nav{display:flex;justify-content:space-between;align-items:center;margin-top:18px;}
+.quiz-score-badge{font-size:12px;font-weight:700;font-family:monospace;
+  background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.2);
+  padding:4px 11px;border-radius:8px;color:var(--primary);}
+.quiz-next{padding:9px 22px;border:none;border-radius:20px;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:#fff;cursor:pointer;font-weight:700;font-size:13px;font-family:'Poppins',sans-serif;
+  transition:all .3s;display:flex;align-items:center;gap:7px;}
+.quiz-next:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(56,189,248,.35);}
+.quiz-next:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none;}
+.quiz-result{text-align:center;padding:24px 0;}
+.quiz-result .big-score{font-size:56px;font-weight:800;font-family:monospace;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;}
+.quiz-result p{color:var(--text-muted);font-size:14px;line-height:1.7;margin-bottom:20px;}
+.quiz-restart{padding:11px 26px;border:none;border-radius:20px;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:#fff;font-weight:700;cursor:pointer;font-family:'Poppins',sans-serif;font-size:13px;transition:all .3s;}
+.quiz-restart:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(56,189,248,.35);}
 
-#chatWindow {
-  position: fixed;
-  bottom: 110px;
-  right: 30px;
-  width: 380px;
-  max-height: 560px;
-  background: linear-gradient(145deg, #0d1f38, #0a1528);
-  border: 1px solid rgba(56,189,248,.25);
-  border-radius: 24px;
-  box-shadow: 0 30px 80px rgba(0,0,0,.7), 0 0 0 1px rgba(56,189,248,.08);
-  display: flex;
-  flex-direction: column;
-  z-index: 3000;
-  overflow: hidden;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(20px) scale(.96);
-  transition: opacity .35s, transform .35s cubic-bezier(.23,1,.32,1);
+/* ── CHATBOT ── */
+#chatBtn{position:fixed;bottom:30px;right:30px;width:62px;height:62px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));border:none;cursor:pointer;
+  box-shadow:0 8px 32px rgba(56,189,248,.45),0 0 0 0 rgba(56,189,248,.4);
+  display:flex;align-items:center;justify-content:center;font-size:26px;
+  z-index:3000;transition:transform .3s,box-shadow .3s;
+  animation:pulse-ring 2.5s ease-in-out infinite;}
+@keyframes pulse-ring{
+  0%,100%{box-shadow:0 8px 32px rgba(56,189,248,.45),0 0 0 0 rgba(56,189,248,.35);}
+  50%{box-shadow:0 8px 32px rgba(56,189,248,.45),0 0 0 14px rgba(56,189,248,0);}
 }
-#chatWindow.open {
-  opacity: 1;
-  pointer-events: all;
-  transform: translateY(0) scale(1);
-}
-.chat-head {
-  padding: 16px 18px;
-  background: linear-gradient(135deg, rgba(56,189,248,.12), rgba(124,58,237,.1));
-  border-bottom: 1px solid rgba(255,255,255,.07);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
-}
-.chat-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  flex-shrink: 0;
-}
-.chat-head-info strong { font-size: 15px; display: block; }
-.chat-head-info span {
-  font-size: 11px;
-  color: #4ade80;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-.chat-head-info span::before {
-  content: '';
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #4ade80;
-  display: inline-block;
-  animation: blink 1.5s ease-in-out infinite;
-}
-@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:.3;} }
-.chat-close-btn {
-  margin-left: auto;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 1px solid var(--glass-border);
-  background: var(--glass);
-  color: var(--text-muted);
-  cursor: pointer;
-  font-size: 13px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all .3s;
-  flex-shrink: 0;
-}
-.chat-close-btn:hover { background: rgba(239,68,68,.2); color: #ef4444; transform: rotate(90deg); }
+#chatBtn:hover{transform:scale(1.1);}
+#chatBtn.open{animation:none;transform:scale(1.05);box-shadow:0 12px 40px rgba(56,189,248,.6);}
+#chatWindow{position:fixed;bottom:110px;right:30px;width:380px;max-height:560px;
+  background:linear-gradient(145deg,#0d1f38,#0a1528);
+  border:1px solid rgba(56,189,248,.25);border-radius:24px;
+  box-shadow:0 30px 80px rgba(0,0,0,.7),0 0 0 1px rgba(56,189,248,.08);
+  display:flex;flex-direction:column;z-index:3000;overflow:hidden;
+  opacity:0;pointer-events:none;transform:translateY(20px) scale(.96);
+  transition:opacity .35s,transform .35s cubic-bezier(.23,1,.32,1);}
+#chatWindow.open{opacity:1;pointer-events:all;transform:translateY(0) scale(1);}
+.chat-head{padding:16px 18px;background:linear-gradient(135deg,rgba(56,189,248,.12),rgba(124,58,237,.1));
+  border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.chat-avatar{width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.chat-head-info strong{font-size:15px;display:block;}
+.chat-head-info .status-line{font-size:11px;display:flex;align-items:center;gap:4px;}
+.status-dot{width:7px;height:7px;border-radius:50%;display:inline-block;}
+.status-dot.online{background:#4ade80;animation:blink 1.5s ease-in-out infinite;}
+.status-dot.offline{background:#f87171;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+.chat-close-btn{margin-left:auto;width:30px;height:30px;border-radius:50%;
+  border:1px solid var(--glass-border);background:var(--glass);color:var(--text-muted);
+  cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;transition:all .3s;}
+.chat-close-btn:hover{background:rgba(239,68,68,.2);color:#ef4444;transform:rotate(90deg);}
+.chat-messages{flex:1;overflow-y:auto;padding:16px 14px;display:flex;flex-direction:column;gap:12px;scroll-behavior:smooth;}
+.chat-messages::-webkit-scrollbar{width:4px;}
+.chat-messages::-webkit-scrollbar-thumb{background:rgba(56,189,248,.25);border-radius:2px;}
+.msg{max-width:86%;padding:10px 14px;border-radius:18px;font-size:13px;line-height:1.65;animation:msgIn .25s ease;word-break:break-word;}
+@keyframes msgIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.msg.bot{background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.18);
+  border-bottom-left-radius:5px;align-self:flex-start;color:var(--text);}
+.msg.user{background:linear-gradient(135deg,rgba(56,189,248,.22),rgba(124,58,237,.18));
+  border:1px solid rgba(56,189,248,.25);border-bottom-right-radius:5px;align-self:flex-end;color:var(--text);}
+.msg.typing{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.14);
+  align-self:flex-start;display:flex;align-items:center;gap:5px;padding:12px 16px;}
+.typing-dot{width:7px;height:7px;border-radius:50%;background:var(--primary);animation:typBounce .8s ease-in-out infinite;}
+.typing-dot:nth-child(2){animation-delay:.15s;}
+.typing-dot:nth-child(3){animation-delay:.3s;}
+@keyframes typBounce{0%,60%,100%{transform:translateY(0);opacity:.4;}30%{transform:translateY(-6px);opacity:1;}}
+/* Bot message formatting */
+.msg.bot h4{font-size:13px;font-weight:700;color:var(--primary);margin:8px 0 4px;}
+.msg.bot h4:first-child{margin-top:0;}
+.msg.bot ul,.msg.bot ol{padding-left:16px;margin:5px 0;}
+.msg.bot li{margin-bottom:3px;font-size:12.5px;}
+.msg.bot code{background:rgba(56,189,248,.15);padding:1px 5px;border-radius:4px;font-family:monospace;font-size:11.5px;color:var(--primary);}
+.msg.bot pre{background:rgba(0,0,0,.35);border:1px solid var(--glass-border);border-radius:8px;padding:10px;margin:7px 0;overflow-x:auto;}
+.msg.bot pre code{background:none;padding:0;font-size:11px;color:#a5f3fc;}
+.msg.bot .formula-box{background:rgba(0,0,0,.3);border:1px solid rgba(56,189,248,.2);border-radius:8px;padding:10px 12px;margin:7px 0;font-family:monospace;font-size:12px;color:#67e8f9;text-align:center;}
+.msg.bot table{width:100%;border-collapse:collapse;margin:7px 0;font-size:12px;}
+.msg.bot th{background:rgba(56,189,248,.1);color:var(--primary);padding:6px 8px;text-align:left;font-size:11px;font-weight:700;}
+.msg.bot td{padding:5px 8px;border-bottom:1px solid var(--glass-border);color:var(--text-muted);}
 
-.chat-status-bar {
-  padding: 7px 16px;
-  background: rgba(34,197,94,.08);
-  border-bottom: 1px solid rgba(34,197,94,.15);
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  flex-shrink: 0;
-  font-size: 11px;
-  color: #4ade80;
-}
-.chat-status-bar i { font-size: 10px; }
-
-.chat-messages {
-  flex: 1;
-  overflow-y: auto;
-  padding: 16px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  scroll-behavior: smooth;
-}
-.chat-messages::-webkit-scrollbar { width: 4px; }
-.chat-messages::-webkit-scrollbar-thumb { background: rgba(56,189,248,.25); border-radius: 2px; }
-
-.msg {
-  max-width: 86%;
-  padding: 10px 14px;
-  border-radius: 18px;
-  font-size: 13px;
-  line-height: 1.65;
-  animation: msgIn .25s ease;
-  word-break: break-word;
-}
-@keyframes msgIn { from{opacity:0;transform:translateY(8px);} to{opacity:1;transform:translateY(0);} }
-.msg.bot {
-  background: rgba(56,189,248,.1);
-  border: 1px solid rgba(56,189,248,.18);
-  border-bottom-left-radius: 5px;
-  align-self: flex-start;
-  color: var(--text);
-}
-.msg.user {
-  background: linear-gradient(135deg, rgba(56,189,248,.22), rgba(124,58,237,.18));
-  border: 1px solid rgba(56,189,248,.25);
-  border-bottom-right-radius: 5px;
-  align-self: flex-end;
-  color: var(--text);
-}
-.msg.typing {
-  background: rgba(56,189,248,.08);
-  border: 1px solid rgba(56,189,248,.14);
-  align-self: flex-start;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 12px 16px;
-}
-.typing-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--primary);
-  animation: typingBounce .8s ease-in-out infinite;
-}
-.typing-dot:nth-child(2) { animation-delay: .15s; }
-.typing-dot:nth-child(3) { animation-delay: .3s; }
-@keyframes typingBounce { 0%,60%,100%{transform:translateY(0);opacity:.4;} 30%{transform:translateY(-6px);opacity:1;} }
-
-.chat-suggestions {
-  padding: 0 14px 10px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  flex-shrink: 0;
-}
-.suggestion-chip {
-  padding: 5px 12px;
-  border-radius: 14px;
-  border: 1px solid rgba(56,189,248,.22);
-  background: rgba(56,189,248,.06);
-  color: var(--primary);
-  font-size: 11px;
-  cursor: pointer;
-  transition: all .25s;
-  font-family: 'Poppins', sans-serif;
-  white-space: nowrap;
-}
-.suggestion-chip:hover { background: rgba(56,189,248,.18); border-color: var(--primary); transform: translateY(-1px); }
-
-.chat-input-row {
-  padding: 12px 14px;
-  border-top: 1px solid rgba(255,255,255,.07);
-  display: flex;
-  gap: 8px;
-  align-items: flex-end;
-  flex-shrink: 0;
-}
-#chatInput {
-  flex: 1;
-  padding: 10px 14px;
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(56,189,248,.2);
-  border-radius: 14px;
-  color: var(--text);
-  font-size: 13px;
-  font-family: 'Poppins', sans-serif;
-  outline: none;
-  resize: none;
-  min-height: 40px;
-  max-height: 100px;
-  transition: border-color .3s;
-  line-height: 1.5;
-}
-#chatInput:focus { border-color: var(--primary); background: rgba(56,189,248,.07); }
-#chatInput::placeholder { color: rgba(203,213,225,.4); }
-#sendBtn {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  border: none;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: #fff;
-  font-size: 15px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: all .3s;
-}
-#sendBtn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(56,189,248,.4); }
-#sendBtn:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; }
-
-.chat-no-key {
-  padding: 16px;
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 12px;
-  line-height: 1.6;
-}
-.chat-no-key i { font-size: 28px; color: var(--primary); display: block; margin-bottom: 8px; }
-
-@media(max-width:500px){
-  #chatWindow { width: calc(100vw - 28px); right: 14px; bottom: 100px; }
-  #chatBtn { bottom: 20px; right: 20px; }
+.msg.bot h2,
+.msg.bot h3,
+.msg.bot h4{
+  margin:10px 0 6px;
+  font-weight:700;
+  line-height:1.3;
 }
 
+.msg.bot h2{
+  font-size:18px;
+  color:var(--primary);
+}
+
+.msg.bot h3{
+  font-size:16px;
+  color:var(--primary);
+}
+
+.msg.bot h4{
+  font-size:14px;
+  color:var(--primary);
+}
+
+.msg.bot p{
+  margin:6px 0;
+}
+
+.msg.bot ul{
+  padding-left:20px;
+  margin:8px 0;
+}
+
+.msg.bot li{
+  margin:4px 0;
+  line-height:1.6;
+}
+
+.inline-formula{
+  font-family:monospace;
+  color:#67e8f9;
+}
+
+.formula-box{
+  overflow-x:auto;
+  white-space:nowrap;
+}
+
+.chat-suggestions{padding:0 14px 10px;display:flex;flex-wrap:wrap;gap:6px;flex-shrink:0;}
+.suggestion-chip{padding:5px 12px;border-radius:14px;border:1px solid rgba(56,189,248,.22);
+  background:rgba(56,189,248,.06);color:var(--primary);font-size:11px;cursor:pointer;
+  transition:all .25s;font-family:'Poppins',sans-serif;white-space:nowrap;}
+.suggestion-chip:hover{background:rgba(56,189,248,.18);border-color:var(--primary);transform:translateY(-1px);}
+.chat-input-row{padding:12px 14px;border-top:1px solid rgba(255,255,255,.07);
+  display:flex;gap:8px;align-items:flex-end;flex-shrink:0;}
+#chatInput{flex:1;padding:10px 14px;background:rgba(255,255,255,.06);
+  border:1px solid rgba(56,189,248,.2);border-radius:14px;color:var(--text);font-size:13px;
+  font-family:'Poppins',sans-serif;outline:none;resize:none;min-height:40px;max-height:100px;
+  transition:border-color .3s;line-height:1.5;}
+#chatInput:focus{border-color:var(--primary);background:rgba(56,189,248,.07);}
+#chatInput::placeholder{color:rgba(203,213,225,.4);}
+#sendBtn{width:40px;height:40px;border-radius:12px;border:none;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:#fff;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:all .3s;}
+#sendBtn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(56,189,248,.4);}
+#sendBtn:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none;}
+@media(max-width:500px){#chatWindow{width:calc(100vw - 28px);right:14px;bottom:100px;}#chatBtn{bottom:20px;right:20px;}}
 @media(max-width:600px){
   .modal{border-radius:20px;}
   .modal-header{padding:18px 18px 14px;}
@@ -583,7 +515,6 @@ footer p{color:var(--text-muted);font-size:15px;}
   .modal-header h3{font-size:19px;}
   .modal-tabs{padding:11px 18px 0;}
   .modal-tab{padding:7px 12px;font-size:12px;}
-  .hero{background-attachment:scroll;}
   .section{padding:80px 0;}
   .hero-buttons{flex-direction:column;align-items:center;}
   .btn{width:100%;max-width:300px;text-align:center;justify-content:center;}
@@ -593,48 +524,66 @@ footer p{color:var(--text-muted);font-size:15px;}
 }
 </style>
 </head>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <body>
 
 <div class="progress-bar" id="progressBar"></div>
 <div class="nav-overlay" id="navOverlay"></div>
 
 <nav id="navbar">
-  <a href="#home" class="logo"><i class="fas fa-network-wired"></i> NetVision</a>
+  <a href="#home" class="logo"><i class="fas fa-network-wired"></i> Conecta Lab</a>
   <ul id="navMenu">
     <li><a href="#home" class="active">Inicio</a></li>
+    <li><a href="#intro-video">Intro</a></li>
     <li><a href="#temas">Temas</a></li>
     <li><a href="#info">Por qué</a></li>
-    <li><a href="#glosario">Glosario</a></li>
   </ul>
   <div class="hamburger" id="hamburger" aria-label="Menú" role="button" tabindex="0">
     <span></span><span></span><span></span>
   </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-content">
-    <h1>Aprende Redes Como Un Profesional</h1>
-    <p>Explora networking, protocolos, ciberseguridad, cloud y telecomunicaciones en una plataforma moderna e interactiva.</p>
+    <h1>Aprende Redes<br>Como Un Profesional</h1>
+    <p>Explora networking, protocolos, ciberseguridad, cloud y telecomunicaciones en una plataforma moderna e interactiva, con quizzes IA y calculadoras.</p>
     <div class="hero-buttons">
       <button class="btn btn-primary" onclick="scrollToSection('temas')"><i class="fas fa-play"></i> Comenzar Ahora</button>
-      <button class="btn btn-secondary" onclick="scrollToSection('glosario')"><i class="fas fa-book"></i> Ver Glosario</button>
+      <button class="btn btn-secondary" onclick="scrollToSection('intro-video')"><i class="fas fa-film"></i> Ver Intro</button>
     </div>
   </div>
 </section>
 
+<!-- INTRO VIDEO -->
+<section class="intro-video-section" id="intro-video">
+  <div class="container">
+    <div class="intro-video-wrap">
+      <div class="intro-video-label"><i class="fas fa-play-circle"></i> Video introductorio</div>
+      <h2 class="intro-video-title">¿Qué es el Networking? Empieza aquí</h2>
+      <p class="intro-video-desc">Si estás comenzando en el mundo de las redes, este video te dará una base sólida sobre cómo funciona la comunicación entre dispositivos, protocolos fundamentales y la arquitectura de Internet.</p>
+      <div class="intro-yt">
+        <iframe src="https://www.youtube.com/embed/tSodBEAJz9Y"
+          allowfullscreen allow="autoplay; encrypted-media; picture-in-picture" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEMAS -->
 <section class="section" id="temas">
   <div class="container">
     <div class="section-title">
       <h2>🔥 Temas Destacados</h2>
-      <p>Aprende los conceptos más importantes de redes con contenido interactivo y videos</p>
+      <p>Aprende con contenido interactivo, quizzes IA, calculadoras y videos seleccionados</p>
     </div>
     <div class="cards">
       <div class="card"><span class="icon">🖥️</span><h3>Modelo OSI</h3><p>Comprende las 7 capas y cómo viajan los datos dentro de una red moderna.</p><button class="card-btn" onclick="openModal('osi')"><i class="fas fa-arrow-right"></i> Explorar</button></div>
       <div class="card"><span class="icon">📡</span><h3>Direcciones IP</h3><p>Domina IPv4, IPv6, subnetting y configuración profesional de redes.</p><button class="card-btn" onclick="openModal('ip')"><i class="fas fa-arrow-right"></i> Explorar</button></div>
       <div class="card"><span class="icon">🔐</span><h3>Ciberseguridad</h3><p>Protege redes contra ataques informáticos con técnicas avanzadas.</p><button class="card-btn" onclick="openModal('security')"><i class="fas fa-arrow-right"></i> Explorar</button></div>
       <div class="card"><span class="icon">🌍</span><h3>Protocolos TCP/IP</h3><p>Estudia TCP, UDP, HTTP, DNS, DHCP y protocolos esenciales de red.</p><button class="card-btn" onclick="openModal('protocols')"><i class="fas fa-arrow-right"></i> Explorar</button></div>
-      <div class="card"><span class="icon">📶</span><h3>WiFi & Routers</h3><p>Configura redes inalámbricas y optimiza conexiones profesionales.</p><button class="card-btn" onclick="openModal('wifi')"><i class="fas fa-arrow-right"></i> Explorar</button></div>
-      <div class="card"><span class="icon">🔀</span><h3>Switching & VLANs</h3><p>Segmenta redes con switches, VLANs y domina el protocolo Spanning Tree.</p><button class="card-btn" onclick="openModal('switching')"><i class="fas fa-arrow-right"></i> Explorar</button></div>
+      <div class="card"><span class="icon">📶</span><h3>WiFi &amp; Routers</h3><p>Configura redes inalámbricas y optimiza conexiones profesionales.</p><button class="card-btn" onclick="openModal('wifi')"><i class="fas fa-arrow-right"></i> Explorar</button></div>
+      <div class="card"><span class="icon">🔀</span><h3>Switching &amp; VLANs</h3><p>Segmenta redes con switches, VLANs y domina el protocolo Spanning Tree.</p><button class="card-btn" onclick="openModal('switching')"><i class="fas fa-arrow-right"></i> Explorar</button></div>
       <div class="card"><span class="icon">🗺️</span><h3>Routing Dinámico</h3><p>Aprende OSPF, BGP y los protocolos de enrutamiento que mueven Internet.</p><button class="card-btn" onclick="openModal('routing')"><i class="fas fa-arrow-right"></i> Explorar</button></div>
       <div class="card"><span class="icon">🔌</span><h3>Cableado Estructurado</h3><p>Normas TIA/EIA, categorías de cables, fibra óptica y topologías físicas.</p><button class="card-btn" onclick="openModal('cabling')"><i class="fas fa-arrow-right"></i> Explorar</button></div>
       <div class="card"><span class="icon">☁️</span><h3>Cloud Networking</h3><p>Redes en AWS, Azure y GCP: VPC, subnets, balanceadores y CDN.</p><button class="card-btn" onclick="openModal('cloud')"><i class="fas fa-arrow-right"></i> Explorar</button></div>
@@ -642,11 +591,12 @@ footer p{color:var(--text-muted);font-size:15px;}
   </div>
 </section>
 
+<!-- INFO -->
 <section class="section" id="info">
   <div class="container">
     <div class="info-grid">
       <div class="info-img">
-        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop" alt="Redes profesionales">
+        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop" alt="Redes profesionales" loading="lazy">
       </div>
       <div class="info-text">
         <h2>💡 ¿Por qué aprender redes?</h2>
@@ -664,22 +614,8 @@ footer p{color:var(--text-muted);font-size:15px;}
   </div>
 </section>
 
-<section class="section" id="glosario">
-  <div class="container">
-    <div class="section-title">
-      <h2>📖 Glosario de Redes</h2>
-      <p>Encuentra definiciones rápidas de los términos más usados en networking</p>
-    </div>
-    <div class="glossary-search-wrap">
-      <i class="fas fa-search search-icon"></i>
-      <input class="glossary-search" id="glossSearch" type="text" placeholder="Buscar término… ej: VLAN, OSPF, MTU" oninput="filterGlossary()">
-    </div>
-    <div class="glossary-grid" id="glossaryGrid"></div>
-  </div>
-</section>
-
 <footer>
-  <p>© 2026 <strong>NetVision Pro</strong> | Plataforma interactiva de redes y ciberseguridad</p>
+  <p>© 2026 <strong>Conecta Lab</strong> | Plataforma interactiva de redes y ciberseguridad</p>
   <p style="margin-top:10px;font-size:14px;">Desarrollado con ❤️ para futuros expertos en redes</p>
 </footer>
 
@@ -697,9 +633,11 @@ footer p{color:var(--text-muted);font-size:15px;}
       <button class="modal-tab active" onclick="switchTab('content')" id="tab-content"><i class="fas fa-file-alt"></i> Contenido</button>
       <button class="modal-tab hidden" onclick="switchTab('diagram')" id="tab-diagram"><i class="fas fa-layer-group"></i> Diagrama</button>
       <button class="modal-tab hidden" onclick="switchTab('calc')" id="tab-calc"><i class="fas fa-calculator"></i> Calculadora</button>
+      <button class="modal-tab" onclick="switchTab('quiz')" id="tab-quiz"><i class="fas fa-brain"></i> Quiz IA</button>
       <button class="modal-tab" onclick="switchTab('video')" id="tab-video"><i class="fas fa-play-circle"></i> Video</button>
     </div>
     <div class="modal-body">
+      <!-- CONTENT -->
       <div class="tab-panel active" id="panel-content">
         <p class="topic-intro" id="modalIntro"></p>
         <div class="concepts-title"><i class="fas fa-layer-group"></i> Conceptos Clave</div>
@@ -709,10 +647,12 @@ footer p{color:var(--text-muted);font-size:15px;}
           <div class="resource-chips" id="modalChips"></div>
         </div>
       </div>
+      <!-- DIAGRAM (OSI only) -->
       <div class="tab-panel" id="panel-diagram">
         <div class="osi-hint"><i class="fas fa-hand-pointer"></i> Haz clic en una capa para ver su detalle</div>
         <div class="osi-diagram" id="osiDiagram"></div>
       </div>
+      <!-- CALC (IP only) -->
       <div class="tab-panel" id="panel-calc">
         <div class="calc-wrap">
           <div class="calc-title"><i class="fas fa-calculator"></i> Calculadora de Subnetting</div>
@@ -739,6 +679,10 @@ footer p{color:var(--text-muted);font-size:15px;}
           </div>
           <div id="calcError" class="calc-error"></div>
           <div class="calc-results" id="calcResults">
+            <div class="calc-header-row">
+              <span class="calc-res-label">Resultados</span>
+              <button class="copy-btn" id="copyBtn" onclick="copyResults()"><i class="fas fa-copy"></i> Copiar</button>
+            </div>
             <div class="calc-result-grid">
               <div class="calc-result-item"><label>Red (Network)</label><span id="resNetwork"></span></div>
               <div class="calc-result-item"><label>Broadcast</label><span id="resBroadcast"></span></div>
@@ -752,9 +696,14 @@ footer p{color:var(--text-muted);font-size:15px;}
           </div>
         </div>
       </div>
+      <!-- QUIZ -->
+      <div class="tab-panel" id="panel-quiz">
+        <div class="quiz-wrap" id="quizWrap"></div>
+      </div>
+      <!-- VIDEO -->
       <div class="tab-panel" id="panel-video">
         <div class="video-container">
-          <iframe id="modalVideo" src="" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" loading="lazy"></iframe>
+          <iframe id="modalVideo" src="" allowfullscreen allow="autoplay; encrypted-media; picture-in-picture" loading="lazy"></iframe>
         </div>
         <div class="video-note"><i class="fas fa-info-circle"></i><span id="modalVideoNote"></span></div>
       </div>
@@ -762,85 +711,94 @@ footer p{color:var(--text-muted);font-size:15px;}
   </div>
 </div>
 
-<!-- ═══════════════════════════════════
-     CHATBOT IA FLOTANTE
-═══════════════════════════════════ -->
+<!-- CHATBOT -->
 <button id="chatBtn" onclick="toggleChat()" aria-label="Abrir asistente IA">🤖</button>
-
-<div id="chatWindow" role="dialog" aria-label="Asistente IA de NetVision">
-
-  <!-- HEADER -->
+<div id="chatWindow" role="dialog" aria-label="Asistente IA Conecta Lab">
   <div class="chat-head">
     <div class="chat-avatar">🧠</div>
     <div class="chat-head-info">
       <strong>NetBot IA</strong>
-      <span>En línea · Experto en redes</span>
+      <div class="status-line">
+        <span class="status-dot offline" id="statusDot"></span>
+        <span id="statusText" style="font-size:11px;color:var(--text-muted)">Verificando…</span>
+      </div>
     </div>
     <button class="chat-close-btn" onclick="toggleChat()"><i class="fas fa-times"></i></button>
   </div>
-
-  <!-- N8N STATUS -->
-  <div class="chat-status-bar">
-    <i class="fas fa-circle"></i> Conectado · Workflow n8n activo
-  </div>
-
-  <!-- MENSAJES -->
   <div class="chat-messages" id="chatMessages">
     <div class="msg bot">
-      👋 ¡Hola! Soy <strong>NetBot</strong>, tu asistente especializado en redes.<br><br>
-      Puedo ayudarte con Modelo OSI, subnetting, protocolos, ciberseguridad, routing y mucho más. ¡Escribe tu pregunta!
+      👋 ¡Hola! Soy <strong>NetBot</strong>, tu asistente de <strong>Conecta Lab</strong>.<br><br>
+      Pregúntame sobre OSI, subnetting, TCP/IP, VLANs, ciberseguridad, routing o cualquier tema de redes.
     </div>
   </div>
-
-  <!-- SUGERENCIAS RÁPIDAS -->
   <div class="chat-suggestions" id="chatSuggestions">
     <button class="suggestion-chip" onclick="sendSuggestion('¿Qué es el Modelo OSI?')">Modelo OSI</button>
-    <button class="suggestion-chip" onclick="sendSuggestion('Explica subnetting con ejemplo')">Subnetting</button>
+    <button class="suggestion-chip" onclick="sendSuggestion('Explica subnetting con ejemplo numérico completo')">Subnetting</button>
     <button class="suggestion-chip" onclick="sendSuggestion('¿Diferencia entre TCP y UDP?')">TCP vs UDP</button>
     <button class="suggestion-chip" onclick="sendSuggestion('¿Qué es una VLAN y para qué sirve?')">VLANs</button>
-    <button class="suggestion-chip" onclick="sendSuggestion('¿Cómo funciona OSPF?')">OSPF</button>
-    <button class="suggestion-chip" onclick="sendSuggestion('¿Qué certifiaciones de redes me recomiendas para empezar?')">Certificaciones</button>
+    <button class="suggestion-chip" onclick="sendSuggestion('¿Cómo funciona OSPF paso a paso?')">OSPF</button>
+    <button class="suggestion-chip" onclick="sendSuggestion('¿Qué certificaciones de redes me recomiendas para empezar?')">Certificaciones</button>
   </div>
-
-  <!-- INPUT -->
   <div class="chat-input-row">
     <textarea id="chatInput" placeholder="Pregunta sobre redes, protocolos, seguridad…" rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
     <button id="sendBtn" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
   </div>
-
 </div>
 
 <script>
-/* ─── TOPIC DATA ─── */
+/* ══════════════════════════════════════════
+   TOPIC DATA
+══════════════════════════════════════════ */
 const topics = {
-  osi:{icon:'🖥️',title:'Modelo OSI',subtitle:'Open Systems Interconnection — 7 capas de red',
+  osi:{
+    icon:'🖥️',title:'Modelo OSI',subtitle:'Open Systems Interconnection — 7 capas de red',
     intro:'El Modelo OSI es un marco de referencia creado por ISO que describe cómo los datos viajan a través de una red, dividiéndolo en 7 capas independientes. Cada capa tiene una función específica y se comunica solo con las adyacentes. Es esencial para diagnosticar problemas y entender cualquier protocolo moderno.',
     concepts:[
       {name:'Encapsulación',desc:'Agregar cabeceras al descender por cada capa al enviar datos'},
       {name:'PDU',desc:'Protocol Data Unit: bit, trama, paquete, segmento y datos'},
-      {name:'Comunicación peer',desc:'Cada capa se comunica con su par en el otro extremo de la red'},
+      {name:'Comunicación peer',desc:'Cada capa se comunica con su par en el otro extremo'},
       {name:'Servicios de capa',desc:'Cada capa proporciona servicios a la capa inmediatamente superior'},
       {name:'Abstracción',desc:'Permite cambiar implementaciones sin afectar otras capas'},
-      {name:'Estandarización',desc:'Permite interoperabilidad entre fabricantes y tecnologías distintas'},
+      {name:'Estandarización',desc:'Permite interoperabilidad entre fabricantes distintos'},
     ],
     chips:['IEEE 802','RFC','Wireshark','Troubleshooting','TCP/IP'],
-    videoId:'vv4y_uOneC0',videoNote:'NetworkChuck explica el Modelo OSI visualmente. Activa subtítulos en español.',
-    extraTab:'diagram'},
-  ip:{icon:'📡',title:'Direcciones IP',subtitle:'IPv4, IPv6, CIDR y Subnetting',
-    intro:'Las direcciones IP identifican dispositivos en una red. IPv4 usa 32 bits mientras IPv6 usa 128 bits. El subnetting divide redes en subredes para optimizar el tráfico y la seguridad, usando máscaras y notación CIDR.',
+    videoId:'vv4y_uOneC0',
+    videoNote:'NetworkChuck explica el Modelo OSI visualmente con ejemplos prácticos. Activa subtítulos si lo necesitas.',
+    extraTab:'diagram',
+    quizFallback:[
+      {q:'¿Cuántas capas tiene el Modelo OSI?',opts:['4','5','7','9'],ans:2,exp:'El Modelo OSI tiene exactamente 7 capas, desde la Física (1) hasta la de Aplicación (7).'},
+      {q:'¿En qué capa opera un switch Ethernet estándar?',opts:['Capa 1 — Física','Capa 2 — Enlace de Datos','Capa 3 — Red','Capa 4 — Transporte'],ans:1,exp:'Los switches Ethernet trabajan en Capa 2 usando direcciones MAC para reenviar tramas dentro de la misma LAN.'},
+      {q:'¿Qué PDU corresponde a la capa de Transporte en TCP?',opts:['Bit','Trama','Paquete','Segmento'],ans:3,exp:'La Capa 4 (Transporte) genera Segmentos en TCP y Datagramas en UDP.'},
+      {q:'¿Cuál de estos protocolos pertenece a la Capa 7?',opts:['IP','TCP','Ethernet','HTTP'],ans:3,exp:'HTTP es un protocolo de Capa 7 (Aplicación). IP es Capa 3, TCP es Capa 4, Ethernet es Capa 2.'},
+      {q:'¿Qué proceso ocurre al BAJAR por las capas OSI al enviar datos?',opts:['Desencapsulación','Fragmentación','Encapsulación','Multiplexación'],ans:2,exp:'La encapsulación agrega cabeceras (y tráilers) en cada capa al enviar. Al recibir ocurre lo inverso: desencapsulación.'},
+    ]
+  },
+  ip:{
+    icon:'📡',title:'Direcciones IP',subtitle:'IPv4, IPv6, CIDR y Subnetting',
+    intro:'Las direcciones IP identifican dispositivos en una red. IPv4 usa 32 bits (4,294 millones de direcciones), IPv6 usa 128 bits. El subnetting divide redes en subredes para optimizar tráfico y seguridad usando máscaras en notación CIDR.',
     concepts:[
-      {name:'IPv4',desc:'32 bits, notación decimal con puntos, ~4300 millones de direcciones'},
-      {name:'IPv6',desc:'128 bits, notación hexadecimal, prácticamente ilimitadas'},
-      {name:'CIDR',desc:'Classless Inter-Domain Routing, notación /24, /16, /8…'},
+      {name:'IPv4',desc:'32 bits, notación decimal: 192.168.1.1, ~4,294M direcciones'},
+      {name:'IPv6',desc:'128 bits, hexadecimal: 2001:db8::1, ilimitadas en la práctica'},
+      {name:'CIDR',desc:'Classless Inter-Domain Routing: notación /24, /16, /8…'},
       {name:'NAT',desc:'Múltiples hosts internos comparten una sola IP pública'},
       {name:'Subnetting',desc:'Dividir una red con máscaras para segmentar el tráfico'},
       {name:'DHCP',desc:'Asignación automática de IP, gateway y DNS a dispositivos'},
     ],
     chips:['RFC 1918','Redes privadas','Broadcast','VLSM','ARP','Gateway'],
-    videoId:'s_gy-PJG0jk',videoNote:'Subnetting paso a paso con ejercicios prácticos de notación CIDR.',
-    extraTab:'calc'},
-  security:{icon:'🔐',title:'Ciberseguridad',subtitle:'Defensa, ataques y protección de redes',
-    intro:'La ciberseguridad protege redes, sistemas y datos contra accesos no autorizados y ataques. Abarca defensa preventiva y respuesta ante incidentes. Es la disciplina con más demanda del sector TI a nivel global.',
+    videoId:'5WfiTHiU4x8',
+    videoNote:'Subnetting paso a paso con ejercicios prácticos y notación CIDR explicada desde cero.',
+    extraTab:'calc',
+    quizFallback:[
+      {q:'¿Cuántos bits tiene una dirección IPv4?',opts:['16','32','64','128'],ans:1,exp:'IPv4 usa 32 bits organizados en 4 octetos de 8 bits cada uno (ej: 192.168.1.1).'},
+      {q:'¿Qué máscara de subred corresponde a /24?',opts:['255.0.0.0','255.255.0.0','255.255.255.0','255.255.255.128'],ans:2,exp:'/24 = 24 bits de red → 255.255.255.0. Quedan 8 bits para hosts = 254 hosts útiles.'},
+      {q:'¿Cuántos hosts útiles tiene una red /27?',opts:['14','30','62','126'],ans:1,exp:'Una /27 tiene 2⁵ = 32 direcciones. Se restan red y broadcast: 30 hosts útiles.'},
+      {q:'¿Qué protocolo asigna IPs automáticamente en una LAN?',opts:['DNS','ARP','DHCP','NAT'],ans:2,exp:'DHCP (Dynamic Host Configuration Protocol) asigna IP, máscara, gateway y DNS de forma automática.'},
+      {q:'¿Cuál es el rango de IPs privadas Clase C según RFC 1918?',opts:['10.0.0.0/8','172.16.0.0/12','192.168.0.0/16','169.254.0.0/16'],ans:2,exp:'RFC 1918 define 192.168.0.0/16 como espacio privado Clase C (65,536 direcciones en total).'},
+    ]
+  },
+  security:{
+    icon:'🔐',title:'Ciberseguridad',subtitle:'Defensa, ataques y protección de redes',
+    intro:'La ciberseguridad protege redes, sistemas y datos contra accesos no autorizados y ataques. Abarca defensa preventiva, detección de amenazas y respuesta ante incidentes. Es la disciplina con mayor demanda del sector TI a nivel global.',
     concepts:[
       {name:'Firewall',desc:'Filtra tráfico según reglas de seguridad configuradas por el admin'},
       {name:'VPN',desc:'Túnel cifrado para comunicación segura sobre redes públicas'},
@@ -850,32 +808,62 @@ const topics = {
       {name:'TLS/SSL',desc:'Cifrado de comunicaciones web, base de HTTPS (puerto 443)'},
     ],
     chips:['Ethical Hacking','Kali Linux','Pentesting','Zero Trust','OWASP','SOC'],
-    videoId:'inWWhr5tnEA',videoNote:'Fundamentos de ciberseguridad. Ideal antes de avanzar a ethical hacking.'},
-  protocols:{icon:'🌍',title:'Protocolos TCP/IP',subtitle:'La suite de protocolos que mueve Internet',
-    intro:'TCP/IP es la suite sobre la que funciona Internet. TCP garantiza entrega ordenada, UDP prioriza velocidad, DNS resuelve nombres y HTTP/HTTPS permite la web. Juntos forman el lenguaje universal de las redes.',
+    videoId:'inWWhr5tnEA',
+    videoNote:'Fundamentos de ciberseguridad en redes. Ideal antes de avanzar a ethical hacking y pentesting.',
+    quizFallback:[
+      {q:'¿Qué protocolo cifra las comunicaciones web modernas?',opts:['HTTP','FTP','TLS/SSL','ICMP'],ans:2,exp:'TLS (Transport Layer Security), sucesor de SSL, cifra el tráfico HTTPS en el puerto 443.'},
+      {q:'¿Qué ataque satura un servidor con tráfico de múltiples fuentes?',opts:['MitM','Phishing','DDoS','SQL Injection'],ans:2,exp:'DDoS (Distributed Denial of Service) usa miles de dispositivos comprometidos para saturar al objetivo.'},
+      {q:'¿En qué capas OSI opera un firewall de estado (stateful)?',opts:['Capa 1','Capa 2','Capas 3 y 4','Solo Capa 7'],ans:2,exp:'Los firewalls de estado inspeccionan hasta Capas 3 y 4: direcciones IP, protocolo y puertos TCP/UDP.'},
+      {q:'¿Qué significa el modelo "Zero Trust" en seguridad?',opts:['Sin contraseñas','Nunca confiar, siempre verificar','Solo tráfico WiFi seguro','Sin firewall externo'],ans:1,exp:'Zero Trust: ningún dispositivo o usuario es de confianza por defecto. Siempre se verifica identidad y contexto.'},
+      {q:'¿Qué herramienta es un sniffer de paquetes ampliamente usado en pentesting?',opts:['Wireshark','Microsoft Word','Cisco IOS','Apache'],ans:0,exp:'Wireshark captura y analiza paquetes en tiempo real. Es la herramienta de análisis de tráfico más popular en pentesting.'},
+    ]
+  },
+  protocols:{
+    icon:'🌍',title:'Protocolos TCP/IP',subtitle:'La suite de protocolos que mueve Internet',
+    intro:'TCP/IP es la suite sobre la que funciona Internet. TCP garantiza entrega ordenada, UDP prioriza velocidad, DNS resuelve nombres y HTTP/HTTPS permite la web. Juntos forman el lenguaje universal de las redes digitales.',
     concepts:[
       {name:'TCP',desc:'Orientado a conexión, garantiza entrega ordenada con confirmaciones'},
       {name:'UDP',desc:'Sin conexión, rápido y ligero para streaming, gaming y DNS'},
       {name:'HTTP/HTTPS',desc:'Transferencia de hipertexto para la web (puertos 80 y 443)'},
       {name:'DNS',desc:'Traduce nombres de dominio (google.com) a direcciones IP'},
       {name:'DHCP',desc:'Asignación automática de configuración de red a dispositivos'},
-      {name:'ICMP',desc:'Mensajes de control y diagnóstico usados por ping y traceroute'},
+      {name:'ICMP',desc:'Mensajes de control y diagnóstico: ping y traceroute'},
     ],
     chips:['3-Way Handshake','Puertos','FTP','SMTP','ARP','Socket'],
-    videoId:'OTwp3xtd4dg',videoNote:'Cómo interactúan TCP, UDP, DNS y HTTP en el modelo de 4 capas.'},
-  wifi:{icon:'📶',title:'WiFi & Routers',subtitle:'Redes inalámbricas y configuración avanzada',
-    intro:'WiFi (IEEE 802.11) es la tecnología inalámbrica más usada. Los routers conectan LANs con Internet y permiten configurar NAT, firewall, QoS y VLANs. Fundamental para cualquier administrador de redes.',
+    videoId:'OTwp3xtd4dg',
+    videoNote:'Cómo interactúan TCP, UDP, DNS y HTTP en el modelo de 4 capas de Internet.',
+    quizFallback:[
+      {q:'¿Qué mecanismo usa TCP para establecer una conexión?',opts:['2-Way Handshake','3-Way Handshake','4-Way Handshake','DHCP Request'],ans:1,exp:'TCP usa el 3-Way Handshake: SYN → SYN-ACK → ACK, garantizando que ambos extremos estén listos para comunicarse.'},
+      {q:'¿En qué puerto opera HTTPS?',opts:['80','443','8080','22'],ans:1,exp:'HTTPS opera en el puerto 443 (TCP). HTTP usa el puerto 80. Ambos pertenecen a la Capa de Aplicación.'},
+      {q:'¿Por qué DNS usa UDP en lugar de TCP?',opts:['Porque es más seguro','Porque las consultas son cortas y la velocidad prima','Porque TCP no soporta nombres de dominio','Porque UDP garantiza entrega'],ans:1,exp:'DNS usa UDP (puerto 53) porque las consultas/respuestas son breves. La velocidad es más importante que la confiabilidad aquí.'},
+      {q:'¿Qué hace el protocolo ARP?',opts:['Asigna IPs automáticamente','Resuelve nombres de dominio','Traduce IP a dirección MAC','Cifra el tráfico web'],ans:2,exp:'ARP (Address Resolution Protocol) traduce una IP conocida a su dirección MAC dentro de la misma LAN.'},
+      {q:'¿Cuál es la diferencia principal entre TCP y UDP?',opts:['TCP es más rápido','UDP garantiza entrega','TCP garantiza entrega y orden','UDP es más seguro'],ans:2,exp:'TCP garantiza entrega ordenada y sin errores mediante ACKs y retransmisiones. UDP es más rápido pero sin garantías.'},
+    ]
+  },
+  wifi:{
+    icon:'📶',title:'WiFi & Routers',subtitle:'Redes inalámbricas y configuración avanzada',
+    intro:'WiFi (IEEE 802.11) es la tecnología inalámbrica más usada. Los routers conectan LANs con Internet y permiten configurar NAT, firewall, QoS y VLANs. WiFi 6 (802.11ax) y WiFi 6E son los estándares más modernos.',
     concepts:[
       {name:'IEEE 802.11',desc:'Estándares WiFi: 802.11a/b/g/n/ac/ax (WiFi 4/5/6/6E)'},
-      {name:'SSID & Bandas',desc:'Identificador de red, bandas 2.4, 5 y 6 GHz con sus ventajas'},
+      {name:'SSID & Bandas',desc:'Identificador de red, bandas 2.4, 5 y 6 GHz'},
       {name:'WPA3',desc:'Protocolo de seguridad inalámbrica más robusto actualmente'},
       {name:'MIMO / Beamforming',desc:'Múltiples antenas para mayor velocidad y cobertura dirigida'},
       {name:'QoS',desc:'Priorización de tráfico: voz primero, luego video y datos'},
       {name:'Mesh Networking',desc:'Redes de malla para cobertura total sin zonas muertas'},
     ],
-    chips:['Canal WiFi','Interferencias','DMZ','Port Forwarding','802.1X'],
-    videoId:'OxiY4yf6GGg',videoNote:'Cómo funcionan routers WiFi, bandas de frecuencia y optimización de redes.'},
-  switching:{icon:'🔀',title:'Switching & VLANs',subtitle:'Conmutación, segmentación y Spanning Tree',
+    chips:['Canal WiFi','Interferencias','DMZ','Port Forwarding','802.1X','MU-MIMO'],
+    videoId:'OxiY4yf6GGg',
+    videoNote:'Cómo funcionan routers WiFi, bandas de frecuencia y optimización de redes inalámbricas.',
+    quizFallback:[
+      {q:'¿Qué estándar WiFi introduce OFDMA para mayor eficiencia?',opts:['802.11n (WiFi 4)','802.11ac (WiFi 5)','802.11ax (WiFi 6)','802.11g'],ans:2,exp:'WiFi 6 (802.11ax) introduce OFDMA para servir múltiples clientes simultáneamente con mayor eficiencia espectral.'},
+      {q:'¿Cuál es la ventaja de 5 GHz sobre 2.4 GHz?',opts:['Mayor alcance','Menos interferencias y más velocidad','Mejor penetración en paredes','Más compatible con dispositivos viejos'],ans:1,exp:'5 GHz ofrece menos interferencia (menos dispositivos la usan) y mayor ancho de banda, aunque con menor alcance que 2.4 GHz.'},
+      {q:'¿Qué protocolo de seguridad WiFi es el más seguro actualmente?',opts:['WEP','WPA','WPA2','WPA3'],ans:3,exp:'WPA3 (2018) usa SAE (Simultaneous Authentication of Equals) reemplazando el handshake de 4 vías de WPA2, mucho más seguro.'},
+      {q:'¿Qué función cumple el modo DMZ en un router?',opts:['Acelera WiFi','Bloquea todo tráfico','Expone un host directamente a Internet sin NAT','Configura VLANs automáticamente'],ans:2,exp:'La DMZ expone un host interno directamente a Internet, útil para servidores de juegos o web, pero sin la protección del NAT.'},
+      {q:'¿Qué significa MIMO en redes WiFi?',opts:['Multiple Input Multiple Output','Main Internet Management Options','Modulation Index Mobile Output','Mesh Infrastructure Monitoring Option'],ans:0,exp:'MIMO (Multiple Input Multiple Output) usa múltiples antenas en emisor y receptor simultáneamente para aumentar velocidad y fiabilidad.'},
+    ]
+  },
+  switching:{
+    icon:'🔀',title:'Switching & VLANs',subtitle:'Conmutación, segmentación y Spanning Tree',
     intro:'Los switches operan en Capa 2 del Modelo OSI usando direcciones MAC para reenviar tramas. Las VLANs segmentan lógicamente la red física y el protocolo STP previene loops en topologías con redundancia.',
     concepts:[
       {name:'Switch L2',desc:'Reenvía tramas usando tabla de direcciones MAC aprendidas dinámicamente'},
@@ -886,9 +874,19 @@ const topics = {
       {name:'Port Security',desc:'Limita MACs aprendidas por puerto para prevenir ataques'},
     ],
     chips:['802.1Q','PVST+','EtherChannel','CDP','MAC flooding','BPDU'],
-    videoId:'h5OVpyVUdsA',videoNote:'VLANs, trunking 802.1Q y Spanning Tree Protocol explicados visualmente.'},
-  routing:{icon:'🗺️',title:'Routing Dinámico',subtitle:'OSPF, BGP y protocolos de enrutamiento',
-    intro:'El routing dinámico permite a los routers aprender rutas automáticamente. OSPF es el estándar en redes empresariales internas y BGP es el protocolo que conecta todos los sistemas autónomos que forman Internet.',
+    videoId:'MmwF1oHOvmg',
+    videoNote:'VLANs, trunking 802.1Q y Spanning Tree Protocol explicados visualmente con escenarios reales.',
+    quizFallback:[
+      {q:'¿En qué capa OSI opera principalmente un switch?',opts:['Capa 1','Capa 2','Capa 3','Capa 4'],ans:1,exp:'Los switches operan en Capa 2 (Enlace de Datos) usando direcciones MAC para reenviar tramas dentro de la misma red.'},
+      {q:'¿Qué protocolo evita los bucles en redes con switches redundantes?',opts:['VLAN','STP','OSPF','CDP'],ans:1,exp:'STP (Spanning Tree Protocol, IEEE 802.1D) bloquea puertos redundantes para eliminar bucles y tormentas de broadcast.'},
+      {q:'¿Qué estándar define el etiquetado de VLANs en enlaces trunk?',opts:['802.11','802.1X','802.1Q','802.3'],ans:2,exp:'IEEE 802.1Q agrega una etiqueta de 4 bytes a cada trama Ethernet para identificar a qué VLAN pertenece en enlaces trunk.'},
+      {q:'¿Qué tabla usa un switch para decidir por qué puerto reenviar una trama?',opts:['Tabla de rutas IP','Tabla ARP','Tabla MAC (CAM)','Tabla de VLANs'],ans:2,exp:'El switch usa la tabla CAM (Content Addressable Memory) que mapea direcciones MAC con el puerto donde se aprendieron.'},
+      {q:'¿Qué es EtherChannel?',opts:['Un tipo especial de VLAN','La agrupación de varios enlaces físicos como uno lógico','Un protocolo de routing','Un mecanismo de autenticación WiFi'],ans:1,exp:'EtherChannel agrupa de 2 a 8 interfaces físicas en un enlace lógico único, aumentando ancho de banda y añadiendo redundancia.'},
+    ]
+  },
+  routing:{
+    icon:'🗺️',title:'Routing Dinámico',subtitle:'OSPF, BGP y protocolos de enrutamiento',
+    intro:'El routing dinámico permite a los routers aprender rutas automáticamente y adaptarse a cambios en la topología. OSPF es el estándar en redes empresariales internas y BGP es el protocolo que conecta los ~80,000 sistemas autónomos que forman Internet.',
     concepts:[
       {name:'OSPF',desc:'Open Shortest Path First: estado de enlace, usa algoritmo de Dijkstra'},
       {name:'BGP',desc:'Border Gateway Protocol: enruta entre sistemas autónomos en Internet'},
@@ -898,20 +896,40 @@ const topics = {
       {name:'Métrica',desc:'Valor que determina la mejor ruta: costo, ancho de banda, saltos'},
     ],
     chips:['Tabla de rutas','IGP','EGP','MPLS','Redistribución','Dijkstra'],
-    videoId:'A1gyRM_5a0Q',videoNote:'OSPF y BGP: cómo funcionan y cuál usa cada parte de Internet.'},
-  cabling:{icon:'🔌',title:'Cableado Estructurado',subtitle:'Normas TIA/EIA, categorías y fibra óptica',
+    videoId:'1z0ULvg_pW8',
+    videoNote:'OSPF y BGP: cómo funcionan, cuándo usar cada uno y cómo enrutan el tráfico en Internet.',
+    quizFallback:[
+      {q:'¿Qué algoritmo usa OSPF para calcular la mejor ruta?',opts:['Bellman-Ford','Dijkstra','Floyd-Warshall','A*'],ans:1,exp:'OSPF usa el algoritmo de Dijkstra (Shortest Path First) sobre el mapa de topología de enlace completo del área.'},
+      {q:'¿Cuál es el propósito principal de BGP en Internet?',opts:['Conectar dispositivos en LAN','Intercambiar rutas entre sistemas autónomos','Asignar IPs dinámicamente','Cifrar tráfico entre routers'],ans:1,exp:'BGP (Border Gateway Protocol) intercambia información de rutas entre los ~80,000 sistemas autónomos que conforman Internet.'},
+      {q:'¿Cuántos saltos máximo soporta RIP?',opts:['8','15','32','64'],ans:1,exp:'RIP limita a 15 saltos. Una ruta de 16 saltos se considera inaccesible, lo que lo hace inadecuado para redes grandes.'},
+      {q:'¿Qué tipo de protocolo de routing es OSPF?',opts:['Vector distancia','Estado de enlace','Híbrido','Exterior Gateway Protocol'],ans:1,exp:'OSPF es un IGP (Interior Gateway Protocol) de estado de enlace: cada router conoce la topología completa del área OSPF.'},
+      {q:'¿Qué métrica usa OSPF por defecto para calcular el costo?',opts:['Número de saltos','Latencia en ms','100 Mbps / ancho de banda del enlace','Carga del enlace'],ans:2,exp:'OSPF calcula el costo como 100 Mbps / Ancho de banda. Mayor ancho de banda = menor costo = ruta preferida.'},
+    ]
+  },
+  cabling:{
+    icon:'🔌',title:'Cableado Estructurado',subtitle:'Normas TIA/EIA, categorías y fibra óptica',
     intro:'El cableado estructurado es la infraestructura física que soporta redes de datos y voz. Las normas TIA/EIA-568 definen categorías de cables de cobre, distancias máximas y topologías. La fibra óptica permite velocidades altas a largas distancias.',
     concepts:[
-      {name:'Cat 5e / Cat 6',desc:'Par trenzado: Cat 6 soporta hasta 10 Gbps en distancias de 55m'},
-      {name:'Cat 6A',desc:'Augmented Cat 6: 10 Gbps a 100m, mejor blindaje contra interferencias'},
+      {name:'Cat 5e / Cat 6',desc:'Par trenzado: Cat 6 soporta hasta 10 Gbps a 55m'},
+      {name:'Cat 6A',desc:'10 Gbps a 100m completos, mejor blindaje contra interferencias'},
       {name:'Fibra monomodo',desc:'SMF: largas distancias hasta 100 km con un solo modo de luz'},
-      {name:'Fibra multimodo',desc:'MMF: distancias cortas hasta 550m con múltiples modos de luz'},
+      {name:'Fibra multimodo',desc:'MMF: hasta 550m con múltiples modos de luz, más barata'},
       {name:'Patch Panel',desc:'Centraliza y organiza el cableado horizontal en el rack'},
-      {name:'TIA-568',desc:'Estándar que define colores RJ-45: 568A y 568B'},
+      {name:'TIA-568',desc:'Estándar que define colores RJ-45: T568A y T568B'},
     ],
     chips:['RJ-45','568A/568B','MDF/IDF','Backbone','UTP/STP','SC/LC','ANSI'],
-    videoId:'SqisgFNy8GI',videoNote:'Cableado estructurado completo: categorías, normas TIA, fibra vs cobre.'},
-  cloud:{icon:'☁️',title:'Cloud Networking',subtitle:'Redes en AWS, Azure y Google Cloud',
+    videoId:'k8mCWycc3gU',
+    videoNote:'Cableado estructurado completo: categorías de cable, normas TIA, fibra vs cobre y rack.',
+    quizFallback:[
+      {q:'¿Cuál es la distancia máxima de un segmento de cobre Cat 6 a 1 Gbps?',opts:['55 metros','100 metros','150 metros','500 metros'],ans:1,exp:'IEEE 802.3 define 100m como la distancia máxima para segmentos de cobre (Cat 5e, Cat 6 a 1 Gbps).'},
+      {q:'¿Qué tipo de fibra se usa para largas distancias (más de 2 km)?',opts:['Multimodo OM1','Multimodo OM4','Monomodo OS2','Cat 7A'],ans:2,exp:'La fibra monomodo (OS1/OS2) tiene un núcleo muy pequeño (~9 µm) que permite transmitir a largas distancias con amplificadores.'},
+      {q:'¿Qué estándar define el pinout del conector RJ-45?',opts:['TIA-568','IEEE 802.3','RFC 1918','ISO 9001'],ans:0,exp:'TIA-568 (T568A y T568B) define el orden de los 8 conductores del RJ-45. T568B es el más usado en América del Norte.'},
+      {q:'¿Qué ventaja tiene la fibra óptica sobre el cable de cobre?',opts:['Más barata','Más fácil de empalmar','Inmune a interferencias electromagnéticas (EMI)','Mayor peso mecánico'],ans:2,exp:'La fibra transmite luz, no señales eléctricas, siendo completamente inmune a EMI/RFI. Ideal para entornos industriales.'},
+      {q:'¿Qué función cumple un patch panel en el rack?',opts:['Es un switch de alta densidad','Concentra el cableado horizontal para conexiones flexibles','Es un firewall de hardware','Es un amplificador de señal WiFi'],ans:1,exp:'El patch panel concentra los cables del cableado horizontal y permite conexiones flexibles hacia los switches mediante patch cords.'},
+    ]
+  },
+  cloud:{
+    icon:'☁️',title:'Cloud Networking',subtitle:'Redes en AWS, Azure y Google Cloud',
     intro:'Cloud networking implementa redes en entornos de nube pública. AWS, Azure y GCP ofrecen VPCs con subnets, grupos de seguridad, balanceadores de carga y conectividad global. Es la base de la infraestructura moderna y del DevOps.',
     concepts:[
       {name:'VPC / VNet',desc:'Virtual Private Cloud: red completamente aislada dentro del proveedor'},
@@ -922,7 +940,16 @@ const topics = {
       {name:'VPN / Direct Connect',desc:'Conexión cifrada o dedicada entre on-premise y la nube'},
     ],
     chips:['AWS','Azure','GCP','Terraform','SD-WAN','Peering','NAT Gateway'],
-    videoId:'M988_fsOSWo',videoNote:'VPCs en AWS, subnets, security groups y arquitecturas cloud básicas.'},
+    videoId:'M988_fsOSWo',
+    videoNote:'VPCs en AWS, subnets, security groups y arquitecturas de cloud networking básicas.',
+    quizFallback:[
+      {q:'¿Qué es una VPC en AWS?',opts:['Un servidor virtual','Una red virtual privada aislada en la nube','Un balanceador de carga','Un servicio de base de datos'],ans:1,exp:'VPC (Virtual Private Cloud) es una red virtual completamente aislada dentro de AWS donde lanzas y controlas tus recursos.'},
+      {q:'¿Qué diferencia a una subnet pública de una privada en cloud?',opts:['El número de IPs disponibles','Si tiene ruta hacia un Internet Gateway','El tipo de instancias que puede hospedar','El proveedor cloud utilizado'],ans:1,exp:'Una subnet pública tiene una ruta hacia un Internet Gateway, permitiendo acceso directo desde Internet. La privada no tiene esa ruta.'},
+      {q:'¿Qué hace un CDN para mejorar el rendimiento web?',opts:['Aumenta el ancho de banda del servidor origen','Cachea contenido en nodos globales cerca del usuario','Cifra el tráfico entre clientes','Balancea carga entre subnets'],ans:1,exp:'Un CDN replica contenido estático en múltiples puntos de presencia globales (PoPs), reduciendo latencia al servir desde el nodo más cercano.'},
+      {q:'¿Qué herramienta se usa comúnmente para IaC (Infrastructure as Code) en cloud?',opts:['Wireshark','Terraform','PuTTY','Nagios'],ans:1,exp:'Terraform es la herramienta IaC más popular para definir y provisionar infraestructura cloud de forma declarativa y reproducible.'},
+      {q:'¿Qué es VPC Peering?',opts:['Una VPN entre cloud y on-premise','Conexión directa entre dos VPCs por red privada sin pasar por Internet','Un tipo de balanceador de carga','Un servicio de firewall gestionado'],ans:1,exp:'VPC Peering conecta dos VPCs directamente a través de la red privada del proveedor, sin que el tráfico salga a Internet público.'},
+    ]
+  },
 };
 
 const osiLayers = [
@@ -930,26 +957,28 @@ const osiLayers = [
     desc:'Capa más cercana al usuario. Proporciona interfaces para que las aplicaciones accedan a los servicios de red. No es la app en sí, sino el protocolo que usa para comunicarse.',
     pdu:'Datos',tags:['HTTP','HTTPS','FTP','SMTP','POP3','DNS','DHCP','SSH','Telnet']},
   {n:6,cls:'l6',name:'Capa 6 — Presentación',proto:'SSL/TLS · JPEG · ASCII',
-    desc:'Traduce, cifra y comprime los datos para que la capa de aplicación los entienda. Responsable del cifrado TLS/SSL que protege HTTPS.',
+    desc:'Traduce, cifra y comprime datos. Responsable del cifrado TLS/SSL que protege HTTPS. Define formatos: ASCII, Unicode, JPEG, MP4.',
     pdu:'Datos',tags:['SSL','TLS','Cifrado','Compresión','JPEG','UTF-8','ASCII']},
   {n:5,cls:'l5',name:'Capa 5 — Sesión',proto:'NetBIOS · RPC · NFS',
-    desc:'Gestiona el establecimiento, mantenimiento y cierre de sesiones entre aplicaciones. Controla el diálogo (full-duplex vs half-duplex) y la sincronización.',
+    desc:'Gestiona el establecimiento, mantenimiento y cierre de sesiones entre aplicaciones. Controla el diálogo (full/half-duplex) y la sincronización con puntos de control.',
     pdu:'Datos',tags:['NetBIOS','RPC','NFS','Sockets','SAP','SDP']},
   {n:4,cls:'l4',name:'Capa 4 — Transporte',proto:'TCP · UDP · SCTP',
-    desc:'Proporciona transferencia confiable (TCP) o rápida sin garantías (UDP). Usa puertos para identificar procesos y realiza control de flujo y errores.',
+    desc:'Transferencia confiable (TCP) o rápida sin garantías (UDP). Usa puertos para identificar procesos. Realiza control de flujo, de congestión y corrección de errores.',
     pdu:'Segmento (TCP) / Datagrama (UDP)',tags:['TCP','UDP','Puertos','3-Way Handshake','Segmentación','Control de flujo']},
   {n:3,cls:'l3',name:'Capa 3 — Red',proto:'IP · ICMP · OSPF · BGP',
     desc:'Direccionamiento lógico (IP) y enrutamiento de paquetes entre redes. Los routers operan aquí. Determina la mejor ruta hacia el destino.',
     pdu:'Paquete',tags:['IPv4','IPv6','Router','ICMP','ARP','OSPF','BGP','NAT']},
-  {n:2,cls:'l2',name:'Capa 2 — Enlace de Datos',proto:'Ethernet · WiFi · VLAN',
+  {n:2,cls:'l2',name:'Capa 2 — Enlace de Datos',proto:'Ethernet · WiFi · 802.1Q',
     desc:'Organiza bits en tramas y gestiona el acceso al medio. Usa direcciones MAC para identificar dispositivos en la misma LAN. Los switches operan aquí.',
     pdu:'Trama',tags:['Ethernet','MAC','Switch','VLAN','STP','802.11','PPP']},
   {n:1,cls:'l1',name:'Capa 1 — Física',proto:'Ethernet físico · WiFi RF · Fibra',
-    desc:'Define las especificaciones eléctricas y mecánicas del medio: cables, conectores, voltajes, frecuencias y sincronización de bits.',
+    desc:'Define especificaciones eléctricas y mecánicas del medio: cables, conectores, voltajes, frecuencias y sincronización de bits.',
     pdu:'Bits (0 y 1)',tags:['Cables','Fibra','Voltajes','Hub','Repetidor','RJ-45','SFP']},
 ];
 
-/* ─── MODAL ─── */
+/* ══════════════════════════════════════════
+   MODAL
+══════════════════════════════════════════ */
 function openModal(key){
   const t=topics[key]; if(!t) return;
   document.getElementById('modalIcon').textContent=t.icon;
@@ -969,6 +998,7 @@ function openModal(key){
   if(t.extraTab==='diagram') buildOSIDiagram();
   document.getElementById('calcResults').classList.remove('visible');
   document.getElementById('calcError').style.display='none';
+  initQuiz(key);
   switchTab('content');
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow='hidden';
@@ -981,17 +1011,20 @@ function closeModal(){
 function switchTab(tab){
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.modal-tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById(`panel-${tab}`).classList.add('active');
-  document.getElementById(`tab-${tab}`).classList.add('active');
+  document.getElementById('panel-'+tab).classList.add('active');
+  document.getElementById('tab-'+tab).classList.add('active');
   if(tab==='video'){
     const id=topics[document.getElementById('modal').dataset.topic]?.videoId;
-    if(id) document.getElementById('modalVideo').src=`https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1`;
+    if(id) document.getElementById('modalVideo').src=
+      `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1`;
   }
 }
 document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 
-/* ─── OSI ─── */
+/* ══════════════════════════════════════════
+   OSI DIAGRAM
+══════════════════════════════════════════ */
 function buildOSIDiagram(){
   document.getElementById('osiDiagram').innerHTML=osiLayers.map(l=>`
     <div class="osi-layer ${l.cls}" id="osi-l${l.n}" onclick="toggleOSI(${l.n})">
@@ -1009,23 +1042,24 @@ function buildOSIDiagram(){
     </div>`).join('');
 }
 function toggleOSI(n){
-  const el=document.getElementById(`osi-l${n}`);
+  const el=document.getElementById('osi-l'+n);
   const open=el.classList.contains('open');
   document.querySelectorAll('.osi-layer').forEach(l=>l.classList.remove('open'));
   if(!open) el.classList.add('open');
 }
 
-/* ─── SUBNET CALCULATOR ─── */
+/* ══════════════════════════════════════════
+   SUBNET CALCULATOR
+══════════════════════════════════════════ */
 function calcSubnet(){
   const ipStr=document.getElementById('calcIP').value.trim();
   const prefix=parseInt(document.getElementById('calcCIDR').value);
-  const errEl=document.getElementById('calcError');
-  const resEl=document.getElementById('calcResults');
-  errEl.style.display='none'; resEl.classList.remove('visible');
+  const errEl=document.getElementById('calcError'),resEl=document.getElementById('calcResults');
+  errEl.style.display='none';resEl.classList.remove('visible');
   const parts=ipStr.split('.');
   if(parts.length!==4||parts.some(p=>p===''||isNaN(p)||+p<0||+p>255)){
-    errEl.textContent='❌ IP inválida. Usa el formato: 192.168.1.0';
-    errEl.style.display='block'; return;
+    errEl.textContent='❌ IP inválida. Usa el formato correcto: 192.168.1.0';
+    errEl.style.display='block';return;
   }
   const ip32=parts.reduce((a,p)=>(a<<8)|+p,0)>>>0;
   const mask32=prefix===0?0:(~0<<(32-prefix))>>>0;
@@ -1033,83 +1067,167 @@ function calcSubnet(){
   const net32=(ip32&mask32)>>>0;
   const bcast32=(net32|wild32)>>>0;
   const first32=prefix<31?(net32+1)>>>0:net32;
-  const last32 =prefix<31?(bcast32-1)>>>0:bcast32;
+  const last32=prefix<31?(bcast32-1)>>>0:bcast32;
   const total=Math.pow(2,32-prefix);
   const usable=prefix<=30?total-2:(prefix===31?2:1);
   const n2ip=n=>[(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255].join('.');
-  document.getElementById('resNetwork').textContent =n2ip(net32);
-  document.getElementById('resBroadcast').textContent=n2ip(bcast32);
-  document.getElementById('resFirst').textContent   =prefix<31?n2ip(first32):'N/A';
-  document.getElementById('resLast').textContent    =prefix<31?n2ip(last32) :'N/A';
-  document.getElementById('resMask').textContent    =n2ip(mask32);
-  document.getElementById('resWild').textContent    =n2ip(wild32);
-  document.getElementById('resTotal').textContent   =total.toLocaleString();
-  document.getElementById('resUsable').textContent  =usable>0?usable.toLocaleString():'0';
+  window._subnetRes={
+    network:n2ip(net32),broadcast:n2ip(bcast32),
+    first:prefix<31?n2ip(first32):'N/A',last:prefix<31?n2ip(last32):'N/A',
+    mask:n2ip(mask32),wild:n2ip(wild32),
+    total:total.toLocaleString(),usable:usable>0?usable.toLocaleString():'0',
+    prefix,ip:ipStr
+  };
+  document.getElementById('resNetwork').textContent=window._subnetRes.network;
+  document.getElementById('resBroadcast').textContent=window._subnetRes.broadcast;
+  document.getElementById('resFirst').textContent=window._subnetRes.first;
+  document.getElementById('resLast').textContent=window._subnetRes.last;
+  document.getElementById('resMask').textContent=window._subnetRes.mask;
+  document.getElementById('resWild').textContent=window._subnetRes.wild;
+  document.getElementById('resTotal').textContent=window._subnetRes.total;
+  document.getElementById('resUsable').textContent=window._subnetRes.usable;
   resEl.classList.add('visible');
+  const cb=document.getElementById('copyBtn');
+  cb.classList.remove('copied');
+  cb.innerHTML='<i class="fas fa-copy"></i> Copiar';
+}
+function copyResults(){
+  const r=window._subnetRes;if(!r)return;
+  const text=`Subnetting — ${r.ip}/${r.prefix}\nRed: ${r.network}\nBroadcast: ${r.broadcast}\nPrimer host: ${r.first}\nÚltimo host: ${r.last}\nMáscara: ${r.mask}\nWildcard: ${r.wild}\nHosts totales: ${r.total}\nHosts útiles: ${r.usable}`;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn=document.getElementById('copyBtn');
+    btn.innerHTML='<i class="fas fa-check"></i> Copiado';
+    btn.classList.add('copied');
+    setTimeout(()=>{btn.innerHTML='<i class="fas fa-copy"></i> Copiar';btn.classList.remove('copied');},2200);
+  });
 }
 document.getElementById('calcIP').addEventListener('keydown',e=>{if(e.key==='Enter')calcSubnet();});
 
-/* ─── GLOSSARY ─── */
-const glossaryData=[
-  {term:'ACK',def:'Acknowledgment: señal que TCP envía para confirmar que un segmento fue recibido correctamente.'},
-  {term:'ARP',def:'Address Resolution Protocol: traduce direcciones IP a MACs dentro de la misma red local.'},
-  {term:'BGP',def:'Border Gateway Protocol: protocolo de enrutamiento externo que interconecta sistemas autónomos en Internet.'},
-  {term:'Broadcast',def:'Transmisión enviada simultáneamente a todos los dispositivos de una red o subred.'},
-  {term:'CIDR',def:'Classless Inter-Domain Routing: notación de prefijo (/24) para definir rangos IP sin clases fijas.'},
-  {term:'DHCP',def:'Dynamic Host Configuration Protocol: asigna automáticamente IPs, máscara, gateway y DNS.'},
-  {term:'DMZ',def:'Demilitarized Zone: red separada donde se ubican servidores accesibles desde Internet.'},
-  {term:'DNS',def:'Domain Name System: resuelve nombres de dominio a direcciones IP y viceversa.'},
-  {term:'DDoS',def:'Distributed Denial of Service: satura un servidor usando miles de máquinas comprometidas.'},
-  {term:'Encapsulación',def:'Agregar cabeceras de protocolo a los datos al descender por las capas del Modelo OSI.'},
-  {term:'Ethernet',def:'Tecnología LAN basada en IEEE 802.3 que usa tramas y direcciones MAC para comunicarse.'},
-  {term:'Firewall',def:'Filtra tráfico de red según reglas de seguridad definidas por el administrador.'},
-  {term:'FTP',def:'File Transfer Protocol: transfiere archivos entre cliente y servidor usando puertos 20 y 21.'},
-  {term:'Gateway',def:'Puerta de enlace predeterminada; router al que se envían paquetes hacia redes externas.'},
-  {term:'HTTP / HTTPS',def:'Hypertext Transfer Protocol (Secure): protocolo de comunicación web en los puertos 80 y 443.'},
-  {term:'ICMP',def:'Internet Control Message Protocol: protocolo de diagnóstico usado por ping y traceroute.'},
-  {term:'IDS / IPS',def:'Intrusion Detection/Prevention System: detecta o bloquea actividad maliciosa en tiempo real.'},
-  {term:'IPv4',def:'Protocolo de Internet versión 4: 32 bits, notación decimal a.b.c.d, ~4300 millones de direcciones.'},
-  {term:'IPv6',def:'Versión 6 de IP: 128 bits en notación hexadecimal, prácticamente ilimitadas direcciones.'},
-  {term:'LAN',def:'Local Area Network: red de área local que conecta dispositivos en un área geográfica reducida.'},
-  {term:'MAC Address',def:'Dirección física de 48 bits grabada en la tarjeta de red (ej: AA:BB:CC:11:22:33).'},
-  {term:'MTU',def:'Maximum Transmission Unit: tamaño máximo de un paquete sin fragmentación (Ethernet: 1500 bytes).'},
-  {term:'NAT',def:'Network Address Translation: múltiples dispositivos comparten una sola dirección IP pública.'},
-  {term:'OSPF',def:'Open Shortest Path First: protocolo de estado de enlace que usa el algoritmo de Dijkstra.'},
-  {term:'PDU',def:'Protocol Data Unit: nombre de la unidad de datos por capa OSI (bit, trama, paquete, segmento).'},
-  {term:'Ping',def:'Usa ICMP para medir latencia y verificar conectividad entre dos dispositivos de red.'},
-  {term:'Puerto',def:'Número de 16 bits que identifica un servicio o proceso en un host (ej: 80 HTTP, 22 SSH).'},
-  {term:'Router',def:'Dispositivo de Capa 3 que reenvía paquetes entre redes usando la tabla de enrutamiento.'},
-  {term:'STP',def:'Spanning Tree Protocol (IEEE 802.1D): evita bucles en redes con switches redundantes.'},
-  {term:'Subnet',def:'División lógica de una red IP con máscara de subred para segmentar y organizar el tráfico.'},
-  {term:'Switch',def:'Dispositivo de Capa 2 que reenvía tramas usando la tabla de direcciones MAC.'},
-  {term:'TCP',def:'Transmission Control Protocol: orientado a conexión, garantiza entrega ordenada y sin errores.'},
-  {term:'Traceroute',def:'Muestra el camino (saltos) que sigue un paquete desde el origen hasta el destino.'},
-  {term:'UDP',def:'User Datagram Protocol: sin conexión, más rápido que TCP; usado en streaming y DNS.'},
-  {term:'VLAN',def:'Virtual LAN: segmentación lógica de una red física usando etiquetas 802.1Q en switches.'},
-  {term:'VPN',def:'Virtual Private Network: túnel cifrado sobre una red pública para comunicación segura.'},
-  {term:'WAN',def:'Wide Area Network: red de área amplia que conecta múltiples LANs a través de grandes distancias.'},
-  {term:'WiFi',def:'Tecnología inalámbrica basada en IEEE 802.11 para conectar dispositivos sin cables.'},
-  {term:'OSPF Area',def:'División lógica de una red OSPF; el Área 0 (backbone) conecta todas las demás áreas.'},
-];
+/* ══════════════════════════════════════════
+   QUIZ — con IA vía n8n
+══════════════════════════════════════════ */
+let quizState={};
+const N8N_WEBHOOK='https://bimolecularly-semisentimental-ma.ngrok-free.dev/webhook/web-chat';
+const SESSION_ID=(()=>{
+  let s=sessionStorage.getItem('cl_session');
+  if(!s){s='cl_'+Math.random().toString(36).slice(2,11);sessionStorage.setItem('cl_session',s);}
+  return s;
+})();
 
-function renderGlossary(filter=''){
-  const grid=document.getElementById('glossaryGrid');
-  const q=filter.toLowerCase();
-  const filtered=glossaryData.filter(g=>g.term.toLowerCase().includes(q)||g.def.toLowerCase().includes(q));
-  if(!filtered.length){
-    grid.innerHTML=`<div class="gloss-empty"><i class="fas fa-search" style="display:block;font-size:30px;margin-bottom:12px;color:var(--primary)"></i>Sin resultados para "<strong>${filter}</strong>"</div>`;
-    return;
-  }
-  grid.innerHTML=filtered.map(g=>`
-    <div class="gloss-card">
-      <div class="gloss-term"><i class="fas fa-angle-right"></i>${g.term}</div>
-      <div class="gloss-def">${g.def}</div>
-    </div>`).join('');
+function initQuiz(key,useAI=false){
+  quizState={key,questions:[],idx:0,score:0,answered:false,loading:useAI};
+  renderQuizShell();
+  if(useAI) generateQuizAI(key); else loadFallbackQuiz(key);
 }
-function filterGlossary(){renderGlossary(document.getElementById('glossSearch').value);}
-renderGlossary();
+function loadFallbackQuiz(key){
+  quizState.questions=[...topics[key].quizFallback];
+  quizState.loading=false;
+  renderQuiz();
+}
+async function generateQuizAI(key){
+  renderQuizLoading();
+  const topicName=topics[key].title;
+  const prompt=`Genera exactamente 5 preguntas de opción múltiple sobre "${topicName}" en redes de computadoras. 
+Responde SOLO con un array JSON con este formato exacto, sin texto adicional:
+[{"q":"pregunta","opts":["opción A","opción B","opción C","opción D"],"ans":0,"exp":"explicación breve"}]
+El campo "ans" es el índice (0-3) de la opción correcta. Las preguntas deben ser técnicas, variadas y distintas a las básicas.`;
+  try{
+    const res=await fetch(N8N_WEBHOOK,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({chatInput:prompt,sessionId:SESSION_ID+'_quiz',quizMode:true})
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const raw=await res.json();
+    const data=Array.isArray(raw)?raw[0]:raw;
+    const text=data?.output??data?.text??data?.message??data?.response??data?.answer??'';
+    const jsonMatch=text.match(/\[[\s\S]*\]/);
+    if(!jsonMatch) throw new Error('No JSON');
+    const parsed=JSON.parse(jsonMatch[0]);
+    if(!Array.isArray(parsed)||parsed.length<3) throw new Error('Bad format');
+    quizState.questions=parsed.slice(0,5);
+    quizState.loading=false;
+    renderQuiz();
+  }catch(e){
+    loadFallbackQuiz(key);
+  }
+}
+function renderQuizShell(){
+  document.getElementById('quizWrap').innerHTML='';
+}
+function renderQuizLoading(){
+  document.getElementById('quizWrap').innerHTML=`
+    <div class="quiz-loading">
+      <i class="fas fa-circle-notch"></i>
+      <div style="font-size:14px;font-weight:600;margin-bottom:6px;color:var(--text)">Generando quiz con IA…</div>
+      <div style="font-size:13px">El asistente está creando preguntas personalizadas</div>
+    </div>`;
+}
+function renderQuiz(){
+  const s=quizState;
+  const wrap=document.getElementById('quizWrap');
+  if(!s.questions.length){wrap.innerHTML='<p style="color:var(--text-muted);padding:20px">No hay preguntas disponibles.</p>';return;}
+  if(s.idx>=s.questions.length){
+    const pct=Math.round((s.score/s.questions.length)*100);
+    const msg=pct>=80?'¡Dominio excelente del tema! 🎉':pct>=60?'Buen nivel, sigue practicando 💪':'Repasa el contenido y vuelve a intentarlo 📚';
+    wrap.innerHTML=`<div class="quiz-result">
+      <div class="big-score">${s.score}/${s.questions.length}</div>
+      <p>${pct}% correcto — ${msg}</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button class="quiz-restart" onclick="initQuiz('${s.key}',false)"><i class="fas fa-redo"></i> Repetir</button>
+        <button class="quiz-restart" style="background:linear-gradient(135deg,var(--secondary),var(--accent))" onclick="initQuiz('${s.key}',true)"><i class="fas fa-robot"></i> Nuevas con IA</button>
+      </div>
+    </div>`;return;
+  }
+  const q=s.questions[s.idx];
+  const pct=Math.round((s.idx/s.questions.length)*100);
+  wrap.innerHTML=`
+    <div class="quiz-top-row">
+      <div class="quiz-progress-bar-bg"><div class="quiz-progress-fill" style="width:${pct}%"></div></div>
+      <span class="quiz-counter">${s.idx+1}/${s.questions.length}</span>
+      <button class="quiz-ai-btn" id="aiRefreshBtn" onclick="initQuiz('${s.key}',true)" title="Generar nuevas preguntas con IA">
+        <i class="fas fa-robot"></i> IA
+      </button>
+    </div>
+    <div class="quiz-question">${q.q}</div>
+    <div class="quiz-options">
+      ${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answerQuiz(${i})">${o}</button>`).join('')}
+    </div>
+    <div class="quiz-feedback" id="quizFeedback"></div>
+    <div class="quiz-nav">
+      <span class="quiz-score-badge">✓ ${s.score} correctas</span>
+      <button class="quiz-next" id="quizNext" onclick="nextQuestion()" disabled>
+        ${s.idx+1<s.questions.length?'Siguiente <i class="fas fa-arrow-right"></i>':'Ver resultado <i class="fas fa-trophy"></i>'}
+      </button>
+    </div>`;
+  s.answered=false;
+}
+function answerQuiz(chosen){
+  if(quizState.answered)return;
+  quizState.answered=true;
+  const q=quizState.questions[quizState.idx];
+  const opts=document.querySelectorAll('.quiz-opt');
+  opts.forEach((b,i)=>{
+    b.disabled=true;
+    if(i===q.ans) b.classList.add('correct');
+    else if(i===chosen&&chosen!==q.ans) b.classList.add('wrong');
+    else b.classList.add('reveal');
+  });
+  const fb=document.getElementById('quizFeedback');
+  if(chosen===q.ans){
+    quizState.score++;
+    fb.className='quiz-feedback show ok';
+    fb.innerHTML='<strong>✓ Correcto</strong> — '+(q.exp||'');
+  }else{
+    fb.className='quiz-feedback show fail';
+    fb.innerHTML='<strong>✗ Incorrecto</strong> — '+(q.exp||'');
+  }
+  document.getElementById('quizNext').disabled=false;
+}
+function nextQuestion(){quizState.idx++;renderQuiz();}
 
-/* ─── NAV ─── */
+/* ══════════════════════════════════════════
+   NAV & SCROLL
+══════════════════════════════════════════ */
 const hamburger=document.getElementById('hamburger'),navMenu=document.getElementById('navMenu'),navOverlay=document.getElementById('navOverlay');
 function toggleMenu(open){
   hamburger.classList.toggle('open',open);navMenu.classList.toggle('open',open);
@@ -1119,151 +1237,424 @@ hamburger.addEventListener('click',()=>toggleMenu(!navMenu.classList.contains('o
 hamburger.addEventListener('keydown',e=>{if(e.key==='Enter')toggleMenu(!navMenu.classList.contains('open'));});
 navOverlay.addEventListener('click',()=>toggleMenu(false));
 navMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>toggleMenu(false)));
-
-/* ─── SCROLL ─── */
 window.addEventListener('scroll',()=>{
   document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
   const pct=(window.scrollY/(document.body.scrollHeight-window.innerHeight))*100;
   document.getElementById('progressBar').style.width=Math.min(pct,100)+'%';
   const secs=document.querySelectorAll('section[id]'),links=document.querySelectorAll('nav ul li a');
   let cur='';secs.forEach(s=>{if(scrollY>=s.offsetTop-200)cur=s.id;});
-  links.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')===`#${cur}`)l.classList.add('active');});
+  links.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+cur)l.classList.add('active');});
 });
 function scrollToSection(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'});}
 document.querySelectorAll('nav ul li a').forEach(l=>{
   l.addEventListener('click',e=>{e.preventDefault();scrollToSection(l.getAttribute('href').substring(1));});
 });
+/* ══════════════════════════════════════════
+   CHATBOT
+══════════════════════════════════════════ */
+let chatOpen=false,isBotTyping=false,chatHistory=[];
 
-/* ═════════════════════════════════════
-   CHATBOT IA — N8N WEBHOOK
-═════════════════════════════════════ */
-const N8N_WEBHOOK = 'https://bimolecularly-semisentimental-ma.ngrok-free.dev/webhook/web-chat';
+// Restaurar historial
+(()=>{
+  try{
+    const saved=sessionStorage.getItem('cl_msgs');
+    if(!saved)return;
 
-// sessionId único por pestaña para que n8n mantenga contexto por usuario
-const SESSION_ID = 'nv_' + Math.random().toString(36).slice(2, 11);
+    const msgs=JSON.parse(saved);
+    const container=document.getElementById('chatMessages');
 
-let chatOpen = false;
-let isBotTyping = false;
+    container.innerHTML='';
 
-function toggleChat() {
-  chatOpen = !chatOpen;
-  document.getElementById('chatWindow').classList.toggle('open', chatOpen);
-  document.getElementById('chatBtn').classList.toggle('open', chatOpen);
-  if (chatOpen) setTimeout(() => document.getElementById('chatInput').focus(), 350);
+    msgs.forEach(m=>{
+      const d=document.createElement('div');
+
+      d.className='msg '+m.role;
+
+      if(m.html){
+        d.innerHTML=formatBotMessage(m.text);
+
+        if(window.MathJax){
+          MathJax.typesetPromise([d]);
+        }
+
+      }else{
+        d.textContent=m.text;
+      }
+
+      container.appendChild(d);
+    });
+
+    chatHistory=msgs;
+
+  }catch(e){}
+})();
+
+function saveMsgs(){
+  sessionStorage.setItem(
+    'cl_msgs',
+    JSON.stringify(chatHistory.slice(-40))
+  );
 }
 
-function autoResize(el) {
-  el.style.height = 'auto';
-  el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+/* Estado de conexión dinámico */
+async function checkConnection(){
+
+  try{
+
+    const ctrl=new AbortController();
+
+    setTimeout(()=>ctrl.abort(),5000);
+
+    const res=await fetch(
+      N8N_WEBHOOK,
+      {
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify({
+          chatInput:'ping',
+          sessionId:SESSION_ID+'_ping'
+        }),
+        signal:ctrl.signal
+      }
+    );
+
+    setStatus(res.ok||res.status<500);
+
+  }catch(e){
+    setStatus(false);
+  }
 }
 
-function handleKey(e) {
-  if (e.key === 'Enter' && !e.shiftKey) {
+function setStatus(online){
+
+  document.getElementById('statusDot').className=
+    'status-dot '+(online?'online':'offline');
+
+  document.getElementById('statusText').textContent=
+    online
+      ?'En línea · Experto en redes'
+      :'Desconectado · Revisa n8n';
+}
+
+checkConnection();
+
+function toggleChat(){
+
+  chatOpen=!chatOpen;
+
+  document.getElementById('chatWindow')
+    .classList.toggle('open',chatOpen);
+
+  document.getElementById('chatBtn')
+    .classList.toggle('open',chatOpen);
+
+  if(chatOpen){
+    setTimeout(()=>{
+      document.getElementById('chatInput').focus();
+    },350);
+  }
+}
+
+function autoResize(el){
+
+  el.style.height='auto';
+
+  el.style.height=
+    Math.min(el.scrollHeight,100)+'px';
+}
+
+function handleKey(e){
+
+  if(e.key==='Enter'&&!e.shiftKey){
+
     e.preventDefault();
+
     sendMessage();
   }
 }
 
-function addMessage(text, role, isHTML = false) {
-  const msgs = document.getElementById('chatMessages');
-  const div = document.createElement('div');
-  div.className = `msg ${role}`;
-  if (isHTML) div.innerHTML = text;
-  else div.textContent = text;
+/* Agregar mensaje */
+function addMessage(text,role,isHTML=false){
+
+  const msgs=document.getElementById('chatMessages');
+
+  const div=document.createElement('div');
+
+  div.className='msg '+role;
+
+  if(isHTML){
+
+    div.innerHTML=formatBotMessage(text);
+
+    // Renderizar fórmulas
+    if(window.MathJax){
+      MathJax.typesetPromise([div]);
+    }
+
+  }else{
+
+    div.textContent=text;
+  }
+
   msgs.appendChild(div);
-  msgs.scrollTop = msgs.scrollHeight;
+
+  msgs.scrollTop=msgs.scrollHeight;
+
+  chatHistory.push({
+    role,
+    text,
+    html:isHTML
+  });
+
+  saveMsgs();
+
   return div;
 }
 
-function showTyping() {
-  const msgs = document.getElementById('chatMessages');
-  const div = document.createElement('div');
-  div.className = 'msg typing';
-  div.id = 'typingIndicator';
-  div.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+/* Typing */
+function showTyping(){
+
+  const msgs=document.getElementById('chatMessages');
+
+  const div=document.createElement('div');
+
+  div.className='msg typing';
+
+  div.id='typingIndicator';
+
+  div.innerHTML=
+    '<div class="typing-dot"></div>'+
+    '<div class="typing-dot"></div>'+
+    '<div class="typing-dot"></div>';
+
   msgs.appendChild(div);
-  msgs.scrollTop = msgs.scrollHeight;
+
+  msgs.scrollTop=msgs.scrollHeight;
 }
 
-function removeTyping() {
+function removeTyping(){
+
   document.getElementById('typingIndicator')?.remove();
 }
 
-function sendSuggestion(text) {
-  document.getElementById('chatInput').value = text;
+function sendSuggestion(text){
+
+  document.getElementById('chatInput').value=text;
+
   sendMessage();
 }
 
-function formatBotText(text) {
-  return text
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    .replace(/`([^`]+)`/g, '<code style="background:rgba(56,189,248,.15);padding:1px 5px;border-radius:4px;font-size:12px;">$1</code>')
-    .replace(/\n/g, '<br>');
+/* Markdown + Latex */
+function formatBotMessage(raw){
+
+  let text=String(raw||'');
+
+  // Escapar HTML
+  text=text
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;');
+
+  // Código
+  text=text.replace(
+    /```([\s\S]*?)```/g,
+    (_,code)=>{
+      return `<pre><code>${code.trim()}</code></pre>`;
+    }
+  );
+
+  // Fórmulas $$ $$
+  text=text.replace(
+    /\$\$([\s\S]*?)\$\$/g,
+    (_,formula)=>{
+      return `\\[${formula.trim()}\\]`;
+    }
+  );
+
+  // Fórmulas \[ \]
+  text=text.replace(
+    /\\\[([\s\S]*?)\\\]/g,
+    (_,formula)=>{
+      return `\\[${formula.trim()}\\]`;
+    }
+  );
+
+  // Fórmulas inline $
+  text=text.replace(
+    /\$([^\$]+)\$/g,
+    (_,formula)=>{
+      return `\\(${formula}\\)`;
+    }
+  );
+
+  // Fórmulas inline \( \)
+  text=text.replace(
+    /\\\((.*?)\\\)/g,
+    (_,formula)=>{
+      return `\\(${formula}\\)`;
+    }
+  );
+
+  // Headers
+  text=text.replace(/^### (.*)$/gm,'<h4>$1</h4>');
+  text=text.replace(/^## (.*)$/gm,'<h3>$1</h3>');
+  text=text.replace(/^# (.*)$/gm,'<h2>$1</h2>');
+
+  // Bold
+  text=text.replace(
+    /\*\*(.*?)\*\*/g,
+    '<strong>$1</strong>'
+  );
+
+  // Italic
+  text=text.replace(
+    /\*(.*?)\*/g,
+    '<em>$1</em>'
+  );
+
+  // Listas
+  text=text.replace(
+    /^\s*[-•] (.*)$/gm,
+    '<li>$1</li>'
+  );
+
+  text=text.replace(
+    /^\s*\d+\. (.*)$/gm,
+    '<li>$1</li>'
+  );
+
+  // Agrupar listas
+  text=text.replace(
+    /(<li>.*?<\/li>)/gs,
+    match=>{
+      return `<ul>${match}</ul>`;
+    }
+  );
+
+  // Saltos
+  text=text.replace(/\n/g,'<br>');
+
+  // Limpiar
+  text=text
+    .replace(/<br><ul>/g,'<ul>')
+    .replace(/<\/ul><br>/g,'</ul>')
+    .replace(/<br><h/g,'<h');
+
+  return text;
 }
 
-async function sendMessage() {
-  if (isBotTyping) return;
-  const input = document.getElementById('chatInput');
-  const text = input.value.trim();
-  if (!text) return;
+function esc(s){
 
-  addMessage(text, 'user');
-  input.value = '';
-  input.style.height = 'auto';
+  return s
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;');
+}
 
-  // Ocultar sugerencias tras primer uso
-  const suggestions = document.getElementById('chatSuggestions');
-  if (suggestions) suggestions.style.display = 'none';
+/* Enviar mensaje */
+async function sendMessage(){
 
-  isBotTyping = true;
-  document.getElementById('sendBtn').disabled = true;
+  if(isBotTyping)return;
+
+  const input=document.getElementById('chatInput');
+
+  const text=input.value.trim();
+
+  if(!text)return;
+
+  addMessage(text,'user');
+
+  input.value='';
+
+  input.style.height='auto';
+
+  const sug=document.getElementById('chatSuggestions');
+
+  if(sug)sug.style.display='none';
+
+  isBotTyping=true;
+
+  document.getElementById('sendBtn').disabled=true;
+
   showTyping();
 
-  try {
-    const response = await fetch(N8N_WEBHOOK, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chatInput: text,
-        sessionId: SESSION_ID
-      })
-    });
+  try{
 
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const res=await fetch(
+      N8N_WEBHOOK,
+      {
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify({
+          chatInput:text,
+          sessionId:SESSION_ID
+        })
+      }
+    );
 
-    // n8n puede responder como array o como objeto
-    const raw = await response.json();
-    const data = Array.isArray(raw) ? raw[0] : raw;
+    if(!res.ok){
+      throw new Error('HTTP '+res.status);
+    }
 
-    // Intentar extraer la respuesta del campo más común de n8n
-    const botText =
+    const raw=await res.json();
+
+    const data=Array.isArray(raw)
+      ?raw[0]
+      :raw;
+
+    const botText=
       data?.output ??
       data?.text ??
       data?.message ??
       data?.response ??
       data?.answer ??
       data?.chatOutput ??
-      (typeof data === 'string' ? data : null) ??
+      (typeof data==='string'?data:null) ??
       'Sin respuesta del workflow.';
 
     removeTyping();
-    addMessage(formatBotText(String(botText)), 'bot', true);
 
-  } catch (err) {
+    addMessage(
+      String(botText),
+      'bot',
+      true
+    );
+
+    setStatus(true);
+
+  }catch(err){
+
     removeTyping();
-    let msg = '❌ No se pudo conectar con el workflow de n8n.';
-    if (err.message.includes('Failed to fetch')) {
-      msg = '🌐 Error de red. ¿Está activo el tunnel de ngrok y el workflow en n8n?';
-    } else if (err.message.includes('HTTP 4') || err.message.includes('HTTP 5')) {
-      msg = `⚠️ El webhook respondió con error (${err.message}). Verifica que el workflow esté activado en n8n.`;
+
+    let msg=
+      'No se pudo conectar con el workflow de n8n.';
+
+    if(err.message.includes('Failed to fetch')){
+
+      msg=
+        'Error de red. ¿Está activo el tunnel de ngrok y el workflow en n8n?';
+
+    }else if(err.message.includes('HTTP')){
+
+      msg=
+        'El webhook respondió con error ('+
+        err.message+
+        '). Verifica que el workflow esté activado.';
     }
-    addMessage(msg, 'bot', true);
-  } finally {
-    isBotTyping = false;
-    document.getElementById('sendBtn').disabled = false;
+
+    addMessage(msg,'bot');
+
+    setStatus(false);
+
+  }finally{
+
+    isBotTyping=false;
+
+    document.getElementById('sendBtn').disabled=false;
   }
 }
 </script>
-</body>
-</html>
